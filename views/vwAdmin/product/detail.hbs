@@ -1,0 +1,104 @@
+<div class="content-wraper">
+    <div class="container">
+        <div class="row single-product-area">
+            <div class="col-lg-5 col-md-6">
+                <!-- Product Details Left -->
+                <div class="product-details-left">
+                    <div class="product-details-images slider-navigation-1">
+                        {{#each listImages}}
+                        <div class="lg-image">
+                            <a class="popup-img venobox vbox-item"
+                                href="/images/product/{{../product.IdSanPham}}/{{this}}.jpg" data-gall="myGallery">
+                                <img src="/images/product/{{../product.IdSanPham}}/{{this}}.jpg" alt="product image">
+                            </a>
+                        </div>
+                        {{/each}}
+                    </div>
+                    <div class="product-details-thumbs slider-thumbs-1">
+                        {{#each listImages}}
+                        <div class="sm-image"><img src="/images/product/{{../product.IdSanPham}}/{{this}}.jpg"
+                                alt="product image thumb">
+                        </div>
+                        {{/each}}
+                    </div>
+                </div>
+                <!--// Product Details Left -->
+            </div>
+
+            <div class="col-lg-7 col-md-6">
+                <div class="product-details-view-content pt-60">
+                    <div class="product-info">
+                        <h2>{{product.TenSanPham}}</h2>
+                        <form method="GET">
+                        <div class="form-group">
+                            <label>ID</label>
+                            <a class="form-control">{{this.product.IdSanPham}}</a>
+                        </div>
+                        <div class="form-group">
+                            <label>Tên sản phẩm</label>
+                            <a class="form-control">{{this.product.TenSanPham}}</a>
+                        </div>
+                        <div class="form-group">
+                            <label>Loại sản phẩm</label>
+                            <a class="form-control">{{this.LoaiSanPham.TenDanhMuc}}</a>
+                        </div>
+                        <div class="form-group">
+                            <label>Giá khởi điểm</label>
+                            <a class="form-control">{{this.product.GiaKhoiDiem}}</a>
+                        </div>
+                        <div class="form-group">
+                            <label>Ngày đăng</label>
+                            <a class="form-control">{{this.product.NgayDang}}</a>
+                        </div>
+                        <div class="form-group">
+                            <label>Ngày hết hạn</label>
+                            <a class="form-control">{{this.product.NgayHetHan}}</a>
+                        </div>
+                        <div class="form-group">
+                            <label>Giá bán tối thiểu</label>
+                            <a class="form-control">{{this.product.GiaBanToiThieu}}</a>
+                        </div>
+                        <div class="form-group">
+                            <label>Giá hiện tại</label>
+                            <a class="form-control">{{this.product.GiaHienTai}}</a>
+                        </div>
+                        <div class="form-group">
+                            <label>Người bán</label>
+                            <a class="form-control">{{this.NguoiBan.TenDangNhap}}</a>
+                        </div>
+                        <div class="form-group">
+                            <label>Người thắng</label>
+                            <a class="form-control">{{this.NguoiThang.TenDangNhap}}</a>
+                        </div>
+                        <div class="form-group">
+                            <label>Giá mua ngay</label>
+                            <a class="form-control">{{this.product.GiaMuaNgay}}</a>
+                        </div>
+                        <div class="form-group">
+                            <label>Số lượt ra giá</label>
+                            <a class="form-control">{{this.product.SoLuotRaGia}}</a>
+                            <a href="/admin/product/bidder/{{this.product.IdSanPham}}">Xem lượt đấu giá</a>
+                        </div>
+                        <div class="form-group">
+                            <label>Bước giá</label>
+                            <a class="form-control">{{this.product.BuocGia}}</a>
+                        </div>
+                        <div class="form-group">
+                            <label>Tình trạng</label>
+                            <a class="form-control">{{this.product.TinhTrang}}</a>
+                        </div>
+                        <div class="form-group">
+                            <label>Đánh giá</label>
+                            <a class="form-control">{{this.product.DanhGia}}</a>
+                        </div>
+                        </form>
+                        <button>
+                            <a href="/admin/product/list">Back to product list</a>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- content-wraper end -->

@@ -1,0 +1,93 @@
+<div class="content-wraper">
+    <div class="container">
+        <div class="row single-product-area">
+            <div class="col-lg-5 col-md-6">
+                <!-- Product Details Left -->
+                <div class="product-details-left">
+                    <div class="product-details-images slider-navigation-1">
+                        {{#each listImages}}
+                        <div class="lg-image">
+                            <a class="popup-img venobox vbox-item"
+                                href="/images/product/{{../product.IdSanPham}}/{{this}}.jpg" data-gall="myGallery">
+                                <img src="/images/product/{{../product.IdSanPham}}/{{this}}.jpg" alt="product image">
+                            </a>
+                        </div>
+                        {{/each}}
+                    </div>
+                    <div class="product-details-thumbs slider-thumbs-1">
+                        {{#each listImages}}
+                        <div class="sm-image"><img src="/images/product/{{../product.IdSanPham}}/{{this}}.jpg"
+                                alt="product image thumb">
+                        </div>
+                        {{/each}}
+                    </div>
+                </div>
+                <!--// Product Details Left -->
+            </div>
+
+            <div class="col-lg-7 col-md-6">
+                <div class="product-details-view-content pt-60">
+                    <div class="product-info">
+                        <h2>{{product.TenSanPham}}</h2>
+                        <form method="POST">
+                        <div class="form-group">
+                            <label>ID</label>
+                            <input type="text" class="form-control" id="IdSanPham" name="IdSanPham" readonly value="{{this.product.IdSanPham}}">
+                        </div>
+                        <div class="form-group">
+                            <label>Tên sản phẩm</label>
+                            <input type="text" class="form-control" id="TenSanPham" name="TenSanPham" value="{{this.product.TenSanPham}}" autofocus>
+                        </div>
+                        <div class="form-group">
+                            <label>Loại sản phẩm</label>
+                            <select id="LoaiSanPham" name="LoaiSanPham">
+                            <option value="0">None</option>
+                            {{#each this.LoaiSanPham}} 
+                                <option value="{{IdDanhMuc}}">{{TenDanhMuc}}</option>
+                            {{/each}}
+                            </select>   
+                        </div>
+                        <div class="form-group">
+                            <label>Giá khởi điểm</label>
+                            <input type="text" class="form-control" id="GiaKhoiDiem" name="GiaKhoiDiem" value="{{this.product.GiaKhoiDiem}}" autofocus>
+                        </div>
+                        <div class="form-group">
+                            <label>Giá bán tối thiểu</label>
+                            <input type="text" class="form-control" id="GiaBanToiThieu" name="GiaBanToiThieu" value="{{this.product.GiaBanToiThieu}}" autofocus>
+                        </div>
+                        <div class="form-group">
+                            <label>Giá hiện tại</label>
+                            <input type="text" class="form-control" id="GiaHienTai" name="GiaHienTai" value="{{this.product.GiaHienTai}}" autofocus>
+                        </div>
+                        <div class="form-group">
+                            <label>Giá mua ngay</label>
+                            <input type="text" class="form-control" id="GiaMuaNgay" name="GiaMuaNgay" readonly value="{{this.product.GiaMuaNgay}}">
+                        </div>
+                        <div class="form-group">
+                            <label>Số lượt ra giá</label>
+                            <input type="text" class="form-control" id="SoLuotRaGia" name="SoLuotRaGia" value="{{this.product.SoLuotRaGia}}" autofocus>
+                        </div>
+                        <div class="form-group">
+                            <label>Bước giá</label>
+                            <input type="text" class="form-control" id="BuocGia" name="BuocGia" value="{{this.product.BuocGia}}" autofocus>
+                        </div>
+                        <div class="form-group">
+                            <label>Tình trạng</label>
+                            <input type="text" class="form-control" id="TinhTrang" name="TinhTrang" value="{{this.product.TinhTrang}}" autofocus>
+                        </div>
+                        <div class="form-group">
+                            <label>Đánh giá</label>
+                            <input type="text" class="form-control" id="DanhGia" name="DanhGia" readonly value="{{this.product.DanhGia}}">
+                        </div>
+                        <button type="submit" class="btn btn-outline-success">
+                            <i class="fa fa-check" aria-hidden="true"></i>
+                            Save
+                        </button> 
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- content-wraper end -->

@@ -1,0 +1,29 @@
+{{#if this.empty}} 
+  <div class="card-body"> 
+    <p class="card-text"> Không có dữ liệu. </p> 
+  </div> 
+{{else}} 
+  <table class="table table-hover"> 
+    <thead> 
+      <tr> 
+        <th scope="col" class="text-center">ID</th> 
+        <th scope="col">Tên người mua</th> 
+        <th scope="col">Giá</th> 
+        <th scope="col">Ngày đấu giá</th> 
+      </tr> 
+    </thead> 
+    <tbody> 
+      {{#each this.bidder}} 
+      <tr> 
+        <th scope="row" class="text-center">{{Id}}</th> 
+        <td>{{TenNguoiMua}}</td> 
+        <td>{{Gia}}</td>
+        <td>{{NgayDauGia}}</td>
+      </tr> 
+      {{/each}} 
+    </tbody> 
+  </table> 
+{{/if}}
+<button>
+    <a href="/admin/product/list">Back to product list</a>
+</button>

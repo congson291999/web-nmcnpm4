@@ -1,0 +1,25 @@
+{{#if this.empty}} 
+  <div class="card-body"> 
+    <p class="card-text"> Không có dữ liệu. </p> 
+  </div> 
+{{else}} 
+  <table class="table table-hover"> 
+    <thead> 
+      <tr> 
+        <th scope="col" class="text-center">ID</th> 
+        <th scope="col">Username</th>
+      </tr> 
+    </thead> 
+    <tbody> 
+      {{#each this.nguoidung}} 
+      <tr> 
+        <th scope="row" class="text-center">{{IdNguoiDung}}</th> 
+        <td>{{TenDangNhap}}</td>
+        <td> <a href="/admin/user/detail/{{IdNguoiDung}}">Xem chi tiết</a></td>
+        <td> <a href="/admin/user/update/{{IdNguoiDung}}">Sửa</a></td>
+        <td> <a href="/admin/user/delete/{{IdNguoiDung}}">Xóa</a></td>
+      </tr> 
+      {{/each}} 
+    </tbody> 
+  </table> 
+{{/if}}

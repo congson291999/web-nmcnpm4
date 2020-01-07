@@ -1,0 +1,53 @@
+<div class="card shadow mb-4">
+    <h4 class="card-header">
+        Thông tin người dùng
+    </h4>
+    <div class="card-body">        
+        <form method="POST">
+        <div class="form-group">
+            <label>ID</label>
+            <input type="text" class="form-control" id="IdNguoiDung" name="IdNguoiDung" readonly value="{{this.nguoidung.IdNguoiDung}}">
+        </div>
+        <div class="form-group">
+            <label>Tên đăng nhập</label>
+            <input type="text" class="form-control" id="TenDangNhap" name="TenDangNhap" readonly value="{{this.nguoidung.TenDangNhap}}">
+        </div>
+        <div class="form-group">
+            <label>Mật khẩu</label>
+            <input type="text" class="form-control" id="MatKhau" name="MatKhau" value="{{this.nguoidung.TenDangNhap}}" autofocus>
+        </div>
+        <div class="form-group">
+            <label>Họ và tên</label>
+            <input type="text" class="form-control" id="HoVaTen" name="HoVaTen" value="{{this.nguoidung.HoVaTen}}" autofocus>
+        </div>
+        <div class="form-group">
+            <label>Email</label>
+            <input type="text" class="form-control" id="Email" name="Email" value="{{this.nguoidung.Email}}" autofocus>
+        </div>
+        <div class="form-group">
+            <label>Ngày sinh</label>
+            <input type="date" class="form-control" id="NgaySinh" name="NgaySinh" value="{{this.nguoidung.NgaySinh}}" autofocus>
+        </div>
+        <div class="form-group">
+            <label>Loại người dùng</label>
+            <select id="LoaiNguoiDung" name="LoaiNguoiDung">
+            <option value="0">Admin</option>
+            <option value="1">Buyer</option>
+            <option value="2">Seller</option>
+            </select>                                                       
+        </div>
+        <div class="form-group">
+            <label>Điểm cộng</label>
+            <input type="text" class="form-control" id="DiemCong" name="DiemCong" value="{{this.nguoidung.DiemCong}}" autofocus>
+        </div>
+        <div class="form-group">
+            <label>Điểm trừ</label>
+            <input type="text" class="form-control" id="DiemTru" name="DiemTru" value="{{this.nguoidung.DiemTru}}" autofocus>
+        </div>
+        <button type="submit" class="btn btn-outline-success">
+            <i class="fa fa-check" aria-hidden="true"></i>
+            Save
+        </button>
+        </form>
+    </div>
+</div>

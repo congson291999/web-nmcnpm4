@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html class="login">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký | Sàn đấu giá trực tuyến</title>
+    <!--Made with love by Mutiullah Samim -->
+
+    <!-- Bootstrap V4.1.3 Fremwork CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/png" href="/images/favicon.png">
+
+    <!--Custom styles-->
+    <link rel="stylesheet" type="text/css" href="/style.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
+
+
+</head>
+
+<body class="login">
+    <div class="container">
+        <div class="d-flex justify-content-center h-100">
+            <div class="card_registration">
+                <div class="card-header">
+                    <h3>Sign Up</h3>
+                </div>
+                <div class="card-body">
+                    {{#if err_message}}
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        {{err_message}}
+                    </div>
+                    {{/if}}
+                    <form onsubmit="return isInvalidForm()" method="POST" id="frmRegister" class="frmRegister">
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-address-book"></i></span>
+                            </div>
+                            <input type="text" name="txtName" id="txtName" class="form-control" placeholder="full name">
+                            <img id="checkName" height="30" width="30" src="/images/required.png">
+
+                        </div>
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                            </div>
+                            <input type="text" name="txtDOB" id="txtDOB" class="form-control"
+                                placeholder="date of birth">
+                            <img id="checkDob" height="30" width="30" src="/images/required.png">
+
+                        </div>
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+                            </div>
+                            <input type="text" name="txtEmail" id="txtEmail" class="form-control" placeholder="email">
+                            <img id="checkEmail" height="30" width="30" src="/images/required.png">
+
+                        </div>
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-user"></i></span>
+                            </div>
+                            <input type="text" name="txtUsername" id="txtUsername" class="form-control"
+                                placeholder="username">
+                            <img id="checkUsername" height="30" width="30" src="/images/required.png">
+                        </div>
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-key"></i></span>
+                            </div>
+                            <input type="password" name="txtPass" id="txtPass" class="form-control"
+                                placeholder="password">
+                            <img id="checkPass" height="30" width="30" src="/images/required.png">
+                        </div>
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-check"></i></span>
+                            </div>
+                            <input type="password" name="txtConfirm" id="txtConfirm" class="form-control"
+                                placeholder="confirm password">
+                            <img id="checkConfirm" height="30" width="30" src="/images/required.png">
+                        </div>
+                        <div class="row align-items-center remember">
+                            <input type="checkbox" name="checkAgree" id="checkAgree"><a href="/terms_conditions">I
+                                agree with terms and conditions.</a>
+                        </div>
+
+                        <div id="g-recaptcha" class="g-recaptcha"
+                            data-sitekey="6LdH78cUAAAAAFHVSYEtOp-9_19JGC5mjQi2jxd2"></div>
+                        <div id="pleaseCheck"></div>
+                        <div class="form-group">
+                            <button id="submitButton" name="submitButton" class="btn float-right login_btn"
+                                type="submit">SIGN UP</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src='https://www.google.com/recaptcha/api.js' async defer></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+        //Hàm kiểm tra form hợp lệ
+        function isInvalidForm() {
+            var data = [];
+            data[0] = document.getElementById('txtEmail').value;      	//Email
+            data[1] = document.getElementById('txtUsername').value;     //Username
+            data[2] = document.getElementById('txtPass').value;       	//Password
+            data[3] = document.getElementById('txtConfirm').value;		//Confirm password
+            data[4] = document.getElementById('checkAgree');			//Check Agree
+            data[5] = document.getElementById('checkName');
+            data[6] = document.getElementById('checkDob');
+            var temp_1 = 1;
+            var temp_2 = 1;
+            var temp_3 = 1;
+            var temp_4 = 1;
+            var temp_5 = 1;
+            var temp_6 = 1;
+            var temp_7 = 1;
+            var temp_8 = 1;
+            var temp_9 = 1;
+
+            //Kiểm tra Username khác rỗng
+            if (data[1] === "")
+                temp_2 = 0;
+
+            if (data[5] === "")
+                temp_7 = 0;
+
+            if (data[6] === "")
+                temp_8 = 0;
+            //Kiểm tra Email đúng định dạng (phải có "@")
+            /*
+            1. Phải có ký tự @
+            2. Ký tự @ không nằm ở vị trí đầu
+            3. Phải có ít nhất một dấu . trong địa chỉ mail
+            4. Phải có ít nhất 1 ký tự giữa @ và dấu . cuối cùng
+            5. Phải có ít nhất một ký tự sau dấu . cuối cùng
+            6. Không có khoảng trắng trong địa chỉ mail
+            */
+            var i = data[0].indexOf("@");
+            var j = data[0].lastIndexOf(".");
+            var k = data[0].indexOf(" ");
+
+
+
+            if (!((i !== -1) && (i !== 0) && (j !== -1) && (j > i + 1) && (j < data[0].length - 1) && (k == -1)))
+                temp_1 = 0;
+
+
+            //Kiểm tra Password khác rỗng
+            if (data[2] === "")
+                temp_3 = 0;
+
+            //Kiểm tra Confirm Password trùng Password
+            if ((data[3] !== data[2]) || (data[3] === ""))
+                temp_4 = 0;
+
+            //Kiểm tra checkbox
+            if (!data[4].checked)
+                temp_5 = 0;
+
+            //Kiểm tra reCaptcha
+            if (grecaptcha.getResponse() === "")
+                temp_6 = 0;
+
+            //Kiểm tra form
+            if ((temp_1 === 1) && (temp_2 === 1) && (temp_3 === 1) && (temp_4 === 1) && (temp_5 === 1) && (temp_6 === 1) && (temp_7 === 1) && (temp_8 === 1)) {
+                return true;
+            }
+            else {
+                if (temp_1 === 0)
+                    document.getElementById('checkEmail').src = "/images/required.png";
+                else
+                    document.getElementById('checkEmail').src = "/images/true.png";
+
+                if (temp_2 === 0)
+                    document.getElementById('checkUsername').src = "/images/required.png";
+                else
+                    document.getElementById('checkUsername').src = "/images/true.png";
+
+                if (temp_3 === 0)
+                    document.getElementById('checkPass').src = "/images/required.png";
+                else
+                    document.getElementById('checkPass').src = "/images/true.png";
+
+                if (temp_4 === 0)
+                    document.getElementById('checkConfirm').src = "/images/required.png";
+                else
+                    document.getElementById('checkConfirm').src = "/images/true.png";
+
+                if (temp_5 === 0)
+                    alert("Please agree with terms and conditions to sign up");
+                if (temp_6 === 0)
+                    document.getElementById('pleaseCheck').innerHTML = "(*) Please check the captcha!";
+                if (temp_7 === 0)
+                    document.getElementById('checkName').src = "/images/required.png";
+                else
+                    document.getElementById('checkName').src = "/images/true.png";
+
+                if (temp_8 === 0)
+                    document.getElementById('checkDob').src = "/images/required.png";
+                else
+                    document.getElementById('checkDob').src = "/images/true.png";
+                return false;
+            }
+        }
+    </script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
+    <script>
+        $('#txtDOB').datetimepicker({
+            // format: 'd/m/Y H:i'
+            format: 'd/m/Y',
+            timepicker: false,
+            mask: true,
+        });
+    </script>
+</body>
+
+</html>

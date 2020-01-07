@@ -1,0 +1,163 @@
+<!-- Begin Li's Content Wraper Area -->
+<div class="content-wraper pt-60 pb-60">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+
+                {{#if this.empty}}
+                <div class="card-body">
+                    <p class="card-text">
+                        Không có dữ liệu.
+                    </p>
+                </div>
+                {{else}}
+                <!-- shop-products-wrapper start -->
+                <div class="shop-products-wrapper">
+                    <div class="tab-content">
+                        <div id="grid-view" class="tab-pane fade active show" role="tabpanel">
+                            <div class="product-area shop-product-area">
+                                <div class="row">
+                                    {{#each products}}
+                                    <div class="col-lg-3 col-md-4 col-sm-6 mt-40">
+                                        <!-- single-product-wrap start -->
+                                        <div class="single-product-wrap">
+                                            <div class="product-image">
+                                                <a href="/products/{{IdSanPham}}">
+                                                    <img src="/images/product/{{IdSanPham}}/1.jpg"
+                                                        alt="Li's Product Image">
+                                                </a>
+                                                <!-- <span class="sticker">Top {{sum @key 1}}</span> -->
+                                            </div>
+                                            <div class="product_desc">
+                                                <div class="product_desc_info">
+                                                    <div class="product-review">
+                                                        <h5 class="manufacturer">
+                                                            <span>Seller: </span>
+                                                            <a href="">{{NguoiThang.HoVaTen}}</a>
+                                                        </h5>
+                                                        <div class="rating-box">
+                                                            <ul class="rating">
+                                                                <li><i class="fa fa-thumbs-up"></i>
+                                                                    {{NguoiThang.DiemCong}}</li>
+                                                                <li><i
+                                                                        class="fa fa-thumbs-down"></i>{{NguoiThang.DiemTru}}
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    {{#if ../isAuctioned}}
+                                                    <h4><a class="product_name" href="javascript:;">
+                                                            {{TenSanPham}} </a></h4>
+                                                    {{else}}
+                                                    <h4><a class="product_name" href="/products/{{IdSanPham}}">
+                                                            {{TenSanPham}} </a></h4>
+                                                    {{/if}}
+
+                                                    <div><span class="start-date"><span class="fa fa-calendar"></span>
+                                                            {{NgayDang}}</span></div>
+                                                    <div class="price-box">
+                                                        <span class="new-price"><span class="fa fa-gavel"></span>
+                                                            {{SoLuotRaGia}}</span>
+                                                        <span class="new-price new-price-2">{{format GiaHienTai}}
+                                                            VND</span>
+                                                    </div>
+                                                    <div class="countersection">
+                                                        <span class="end-date">expired {{ThoiHan}}</span>
+                                                    </div>
+                                                </div>
+
+                                                {{#if ../isAuctioned}}
+                                                {{#if DanhGia}}
+                                                <div class="add-actions">
+                                                    <ul class="add-actions-link">
+                                                        <li class="add-cart active w-100"><a href="javascript:;">
+                                                                Đã đánh giá
+                                                            </a></li>
+                                                    </ul>
+                                                </div>
+                                                {{else}}
+                                                <form action="/account/voteLike/bidder={{NguoiThang.IdNguoiDung}}/product={{IdSanPham}}" id="frmLike{{IdSanPham}}" method="POST">
+                                                </form>
+                                                <form action="/account/voteDislike/bidder={{NguoiThang.IdNguoiDung}}/product={{IdSanPham}}"
+                                                    id="frmDislike{{IdSanPham}}" method="POST"></form>
+                                                <div class="add-actions">
+                                                    <ul class="add-actions-link">
+                                                        <li class="add-cart active w-50"><a
+                                                                href="javascript: $('#frmLike{{IdSanPham}}').submit();"><span
+                                                                    class="fa fa-thumbs-up"></span>
+                                                            </a></li>
+                                                        <li class="add-cart active w-50"><a
+                                                                href="javascript: $('#frmDislike{{IdSanPham}}').submit();"><span
+                                                                    class="fa fa-thumbs-down"></span></a></li>
+                                                    </ul>
+                                                </div>
+                                                {{/if}}
+
+                                                {{else}}
+                                                <div class="add-actions">
+                                                    <ul class="add-actions-link">
+                                                        <li class="add-cart active"><a href="#"><span
+                                                                    class="fa fa-shopping-cart"></span>
+                                                                {{format GiaMuaNgay}}
+                                                                VND</a></li>
+                                                        <li><a class="links-details" href="wishlist.html"><i
+                                                                    class="fa fa-heart-o"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                                {{/if}}
+
+                                            </div>
+                                        </div>
+                                        <!-- single-product-wrap end -->
+                                    </div>
+                                    {{/each}}
+                                </div>
+                                <div class="paginatoin-area">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6">
+                                            <p></p>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <ul class="pagination-box">
+                                                {{#if (neq isPage 1)}}
+                                                <li><a href="?page={{prev_value}}" class="Previous"><i
+                                                            class="fa fa-chevron-left"></i>
+                                                        Previous</a>
+                                                </li>
+                                                {{/if}}
+
+                                                {{#each this.page_numbers}}
+                                                {{#if isCurrentPage}}
+                                                <li class="active"><a href="javascript:;">{{value}}</a></li>
+                                                {{else}}
+                                                <li class=""><a href="?page={{value}}">{{value}}</a></li>
+                                                {{/if}}
+                                                {{/each}}
+
+                                                {{#if (neq isPage num_of_page)}}
+                                                <li>
+                                                    <a href="?page={{next_value}}" class="Next"> Next <i
+                                                            class="fa fa-chevron-right"></i></a>
+                                                </li>
+                                                {{/if}}
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{/if}}
+
+
+
+
+                <!-- shop-products-wrapper end -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Content Wraper Area End Here -->

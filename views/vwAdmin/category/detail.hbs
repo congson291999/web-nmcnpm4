@@ -1,0 +1,48 @@
+{{#if this.empty1}}    
+
+{{else}}
+    <table class="table table-hover"> 
+        <thead> 
+            <tr> 
+            <th scope="col" class="text-center">ID</th> 
+            <th scope="col">Tên Danh Mục</th> 
+            <th scope="col">Thuộc Danh Mục</th> 
+            </tr> 
+        </thead> 
+        <tbody> 
+            {{#each this.danhmuc}} 
+            <tr> 
+                <th scope="row" class="text-center">{{IdDanhMuc}}</th> 
+                <td>{{TenDanhMuc}}</td> 
+                <td>{{ThuocDanhMuc}}</td>
+            </tr> 
+            {{/each}}
+        </tbody> 
+    </table> 
+{{/if}} 
+
+{{#if this.empty2}} 
+    
+{{else}}
+    <table class="table table-hover"> 
+        <thead> 
+            <tr> 
+            <th scope="col" class="text-center">ID</th> 
+            <th scope="col">Tên Sản Phẩm</th> 
+            <th scope="col">Loại Sản Phẩm</th> 
+            </tr> 
+        </thead> 
+        <tbody> 
+            {{#each this.sanpham}} 
+            <tr> 
+                <th scope="row" class="text-center">{{IdSanPham}}</th> 
+                <td>{{TenSanPham}}</td> 
+                <td>{{LoaiSanPham}}</td>
+            </tr> 
+            {{/each}}
+        </tbody> 
+    </table> 
+{{/if}} 
+<button>
+  <a href="/admin/category/list">Back to category list</a>
+</button>

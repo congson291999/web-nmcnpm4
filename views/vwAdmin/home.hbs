@@ -1,0 +1,18 @@
+<h4>THÔNG BÁO MỚI</h4>
+{{#if this.empty}} 
+  <div class="card-body"> 
+    <p class="card-text"> Không có thông báo mới. </p> 
+  </div> 
+{{else}} 
+  <table class="table table-hover"> 
+    <tbody> 
+      {{#each this.yeucau}} 
+      <tr> 
+        <td> Người mua có id <b>{{IdNguoiDung}}</b> muốn nâng cấp lên Seller</td> 
+        <td> <a href="/admin/user/accept/{{IdNguoiDung}}">Duyệt</a></td>
+        <td> <a href="/admin/user/refuse/{{IdNguoiDung}}">Xóa</a></td>
+      </tr> 
+      {{/each}} 
+    </tbody> 
+  </table> 
+{{/if}}

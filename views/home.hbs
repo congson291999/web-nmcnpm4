@@ -1,0 +1,386 @@
+<!-- Header Area End Here -->
+<!-- Begin Slider With Category Menu Area -->
+<div class="slider-with-banner">
+    <div class="container">
+        <div class="row">
+            <!-- Begin Category Menu Area -->
+            <div class="col-lg-3">
+                <!--Category Menu Start-->
+                <div class="category-menu">
+                    <div class="category-heading">
+                        <h2 class="categories-toggle"><span>categories</span></h2>
+                    </div>
+                    <div id="cate-toggle" class="category-menu-list">
+                        <ul>
+                            {{#each lcCategories.[0]}}
+                            <li class="right-menu"><a href="/categories/{{IdDanhMuc}}/products">{{TenDanhMuc}}</a>
+                                <ul class="cat-mega-menu">
+                                    <li class="right-menu cat-mega-title">
+                                        <ul>
+                                            {{#each ../lcCategories.[1]}}
+                                            {{#if (eq ThuocDanhMuc ../IdDanhMuc)}}
+                                            <li><a href="/categories/{{IdDanhMuc}}/products">{{TenDanhMuc}}</a></li>
+                                            {{/if}}
+                                            {{/each}}
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            {{/each}}
+
+                        </ul>
+                    </div>
+                </div>
+                <!--Category Menu End-->
+            </div>
+            <!-- Category Menu Area End Here -->
+            <!-- Begin Slider Area -->
+            <div class="col-lg-9">
+                <div class="slider-area pt-sm-30 pt-xs-30">
+                    <div class="slider-active owl-carousel">
+                        <!-- Begin Single Slide Area -->
+                        <div class="single-slide align-center-left animation-style-02 bg-4">
+                            <div class="slider-progress"></div>
+                            <div class="slider-content">
+                                <h5>Sản phẩm <span>HOT </span>nhất ngày</h5>
+                                <h2>Điện thoại Galaxy S9 | S9+</h2>
+                                <h3>Giá hiện tại <span>589.000 VND</span></h3>
+                                {{!-- <div class="default-btn slide-btn">
+                                    <a class="links" href="/products/{{IdSanPham}}">Tham gia đấu giá</a>
+                                </div> --}}
+                            </div>
+                        </div>
+                        <!-- Single Slide Area End Here -->
+                        <!-- Begin Single Slide Area -->
+                        <div class="single-slide align-center-left animation-style-01 bg-5">
+                            <div class="slider-progress"></div>
+                            <div class="slider-content">
+                                <h5>Sản phẩm <span>HOT </span>nhất ngày</h5>
+                                <h2>Work Desk Surface Studio 2018</h2>
+                                <h3>Giá hiện tại <span>10.000.000 VND</span></h3>
+                                {{!-- <div class="default-btn slide-btn">
+                                    <a class="links" href="/products/{{IdSanPham}}">Tham gia đấu giá</a>
+                                </div> --}}
+                            </div>
+                        </div>
+                        <!-- Single Slide Area End Here -->
+                        <!-- Begin Single Slide Area -->
+                        <div class="single-slide align-center-left animation-style-02 bg-6">
+                            <div class="slider-progress"></div>
+                            <div class="slider-content">
+                                <h5>Sản phẩm <span>HOT </span>nhất ngày</h5>
+                                <h2>Phantom 4 Pro+ Obsidian</h2>
+                                <h3>Giá hiện tại <span>9.000.000 VND</span></h3>
+                                {{!-- <div class="default-btn slide-btn">
+                                    <a class="links" href="/products/{{IdSanPham}}">Tham gia đấu giá</a>
+                                </div> --}}
+                            </div>
+                        </div>
+                        <!-- Single Slide Area End Here -->
+                    </div>
+                </div>
+            </div>
+            <!-- Slider Area End Here -->
+        </div>
+    </div>
+</div>
+<!-- Slider With Category Menu Area End Here -->
+<!-- Begin Li's Static Banner Area -->
+<div class="li-static-banner pt-20 pt-sm-30 pt-xs-30">
+    <div class="container">
+        <div class="row">
+            <!-- Begin Single Banner Area -->
+            <div class="col-lg-4 col-md-4">
+                <div class="single-banner pb-xs-30">
+                    <a href="javascript:;">
+                        <img src="images/banner/1_3.jpg" alt="Li's Static Banner">
+                    </a>
+                </div>
+            </div>
+            <!-- Single Banner Area End Here -->
+            <!-- Begin Single Banner Area -->
+            <div class="col-lg-4 col-md-4">
+                <div class="single-banner pb-xs-30">
+                    <a href="javascript:;">
+                        <img src="images/banner/1_4.jpg" alt="Li's Static Banner">
+                    </a>
+                </div>
+            </div>
+            <!-- Single Banner Area End Here -->
+            <!-- Begin Single Banner Area -->
+            <div class="col-lg-4 col-md-4">
+                <div class="single-banner">
+                    <a href="javascript:;">
+                        <img src="images/banner/1_5.jpg" alt="Li's Static Banner">
+                    </a>
+                </div>
+            </div>
+            <!-- Single Banner Area End Here -->
+        </div>
+    </div>
+</div>
+<!-- Li's Static Banner Area End Here -->
+<!-- Begin Li's Special Product Area -->
+<section class="product-area li-laptop-product Special-product pt-60 pb-45">
+    <div class="container">
+        <div class="row">
+            <!-- Begin Li's Section Area -->
+            <div class="col-lg-12">
+                <div class="li-section-title">
+                    <h2>
+                        <span>Near Expiry</span>
+                    </h2>
+                </div>
+                <div class="row">
+                    <div class="special-product-active owl-carousel">
+                        {{#each this.near_expiry}}
+                        <div class="col-lg-12">
+
+                            <!-- single-product-wrap start -->
+                            <form method="POST">
+                                <input id="txtName" name="txtName" style="display:none;"
+                                    value={{../authUser.IdNguoiDung}}></input>
+                                <input id="txtId" name="txtId" style="display:none;" value={{IdSanPham}}></input>
+                                <div class="single-product-wrap">
+                                    <div class="product-image">
+                                        <a href="/products/{{IdSanPham}}">
+                                            <img src="images/product/{{IdSanPham}}/1.jpg" alt="Li's Product Image"
+                                                height="250px" width="50%">
+                                        </a>
+                                        <span class="sticker">Top {{sum @key 1}}</span>
+                                    </div>
+                                    <div class="product_desc">
+                                        <div class="product_desc_info">
+                                            <div class="product-review">
+                                                <h5 class="manufacturer" <span>Bidder: </span>
+                                                    <a href="">{{NguoiThang.HoVaTen}}</a>
+                                                </h5>
+                                                <div class="rating-box">
+                                                    <ul class="rating">
+                                                        <li><i class="fa fa-thumbs-up"></i> {{NguoiThang.DiemCong}}</li>
+                                                        <li><i class="fa fa-thumbs-down"></i>{{NguoiThang.DiemTru}}</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <h4><a class="product_name" href="/products/{{IdSanPham}}"> {{TenSanPham}} </a>
+                                            </h4>
+                                            <div><span class="start-date"><span class="fa fa-calendar"></span>
+                                                    {{NgayDang}}</span></div>
+                                            <div class="price-box">
+                                                <span class="new-price"><span class="fa fa-gavel"></span>
+                                                    {{SoLuotRaGia}}</span>
+                                                <span class="new-price new-price-2">{{format GiaHienTai}} VND</span>
+                                            </div>
+                                            <div class="countersection">
+                                                <span class="end-date">expired {{ThoiHan}}</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="add-actions">
+                                            <ul class="add-actions-link">
+                                                {{#if GiaMuaNgay}}
+                                                <li class="add-cart active"><a href="#"><span
+                                                            class="fa fa-shopping-cart"></span> {{format GiaMuaNgay}}
+                                                        VND</a></li>
+                                                <li><button style="border:none; background:0" formaction="/account/cart"
+                                                        type="submit"><i class="fa fa-heart-o"></i></button></li>
+                                                {{else}}
+                                                <li class="w-100"><button style="border:none; background:0" formaction="/account/cart"
+                                                        type="submit"><i class="fa fa-heart-o"></i></button></li>
+                                                {{/if}}
+
+                                                {{!-- <li><a href="#" title="quick view" class="quick-view-btn"
+                                                        data-toggle="modal" data-target="#exampleModalCenter"><i
+                                                            class="fa fa-eye"></i></a></li> --}}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <!-- single-product-wrap end -->
+                        </div>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+            <!-- Li's Section Area End Here -->
+        </div>
+    </div>
+</section>
+<!-- Li's Special Product Area End Here -->
+<!-- Begin Li's Special Product Area -->
+<section class="product-area li-laptop-product Special-product pt-60 pb-45">
+    <div class="container">
+        <div class="row">
+            <!-- Begin Li's Section Area -->
+            <div class="col-lg-12">
+                <div class="li-section-title">
+                    <h2>
+                        <span>Most Bids</span>
+                    </h2>
+                </div>
+                <div class="row">
+                    <div class="special-product-active owl-carousel">
+                        {{#each this.most_bids}}
+                        <div class="col-lg-12">
+                            <form method="POST">
+                                <input id="txtName" name="txtName" style="display:none;"
+                                    value={{../authUser.IdNguoiDung}}></input>
+                                <input id="txtId" name="txtId" style="display:none;" value={{IdSanPham}}></input>
+
+                                <!-- single-product-wrap start -->
+                                <div class="single-product-wrap">
+                                    <div class="product-image">
+                                        <a href="/products/{{IdSanPham}}">
+                                            <img src="images/product/{{IdSanPham}}/1.jpg" alt="Li's Product Image"
+                                                height="250px" width="50%">
+                                        </a>
+                                        <span class="sticker">Top {{sum @key 1}}</span>
+                                    </div>
+                                    <div class="product_desc">
+                                        <div class="product_desc_info">
+                                            <div class="product-review">
+                                                <h5 class="manufacturer">
+                                                    <span>Bidder: </span>
+                                                    <a href="">{{NguoiThang.HoVaTen}}</a>
+                                                </h5>
+                                                <div class="rating-box">
+                                                    <ul class="rating">
+                                                        <li><i class="fa fa-thumbs-up"></i> {{NguoiThang.DiemCong}}</li>
+                                                        <li><i class="fa fa-thumbs-down"></i>{{NguoiThang.DiemTru}}</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <h4><a class="product_name" href="/products/{{IdSanPham}}"> {{TenSanPham}}
+                                                </a></h4>
+                                            <div><span class="start-date"><span class="fa fa-calendar"></span>
+                                                    {{NgayDang}}</span></div>
+                                            <div class="price-box">
+                                                <span class="new-price"><span class="fa fa-gavel"></span>
+                                                    {{SoLuotRaGia}}</span>
+                                                <span class="new-price new-price-2">{{format GiaHienTai}} VND</span>
+                                            </div>
+                                            <div class="countersection">
+                                                <span class="end-date">expired {{ThoiHan}}</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="add-actions">
+                                            <ul class="add-actions-link">
+                                                {{#if GiaMuaNgay}}
+                                                <li class="add-cart active"><a href="#"><span
+                                                            class="fa fa-shopping-cart"></span> {{format GiaMuaNgay}}
+                                                        VND</a></li>
+                                                <li><button style="border:none; background:0" formaction="/account/cart"
+                                                        type="submit"><i class="fa fa-heart-o"></i></button></li>
+                                                {{else}}
+                                                <li class="w-100"><button style="border:none; background:0" formaction="/account/cart"
+                                                        type="submit"><i class="fa fa-heart-o"></i></button></li>
+                                                {{/if}}
+                                                {{!-- <li><a href="#" title="quick view" class="quick-view-btn"
+                                                    data-toggle="modal" data-target="#exampleModalCenter"><i
+                                                        class="fa fa-eye"></i></a></li> --}}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- single-product-wrap end -->
+                            </form>
+                        </div>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+            <!-- Li's Section Area End Here -->
+        </div>
+    </div>
+</section>
+<!-- Li's Special Product Area End Here -->
+<!-- Begin Li's Special Product Area -->
+<section class="product-area li-laptop-product Special-product pt-60 pb-45">
+    <div class="container">
+        <div class="row">
+            <!-- Begin Li's Section Area -->
+            <div class="col-lg-12">
+                <div class="li-section-title">
+                    <h2>
+                        <span>High bid</span>
+                    </h2>
+                </div>
+                <div class="row">
+                    <div class="special-product-active owl-carousel">
+                        {{#each this.high_bid}}
+                        <div class="col-lg-12">
+                            <form method="POST">
+                                <input id="txtName" name="txtName" style="display:none;"
+                                    value={{../authUser.IdNguoiDung}}></input>
+                                <input id="txtId" name="txtId" style="display:none;" value={{IdSanPham}}></input>
+
+                                <!-- single-product-wrap start -->
+                                <div class="single-product-wrap">
+                                    <div class="product-image">
+                                        <a href="/products/{{IdSanPham}}">
+                                            <img src="images/product/{{IdSanPham}}/1.jpg" alt="Li's Product Image"
+                                                height="250px" width="50%">
+                                        </a>
+                                        <span class="sticker">Top {{sum @key 1}}</span>
+                                    </div>
+                                    <div class="product_desc">
+                                        <div class="product_desc_info">
+                                            <div class="product-review">
+                                                <h5 class="manufacturer">
+                                                    <span>Bidder: </span>
+                                                    <a href="">{{NguoiThang.HoVaTen}}</a>
+                                                </h5>
+                                                <div class="rating-box">
+                                                    <ul class="rating">
+                                                        <li><i class="fa fa-thumbs-up"></i> {{NguoiThang.DiemCong}}</li>
+                                                        <li><i class="fa fa-thumbs-down"></i>{{NguoiThang.DiemTru}}</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <h4><a class="product_name" href="/products/{{IdSanPham}}"> {{TenSanPham}}
+                                                </a></h4>
+                                            <div><span class="start-date"><span class="fa fa-calendar"></span>
+                                                    {{NgayDang}}</span></div>
+                                            <div class="price-box">
+                                                <span class="new-price"><span class="fa fa-gavel"></span>
+                                                    {{SoLuotRaGia}}</span>
+                                                <span class="new-price new-price-2">{{format GiaHienTai}} VND</span>
+                                            </div>
+                                            <div class="countersection">
+                                                <span class="end-date">expired {{ThoiHan}}</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="add-actions">
+                                            <ul class="add-actions-link">
+                                                {{#if GiaMuaNgay}}
+                                                <li class="add-cart active"><a href="#"><span
+                                                            class="fa fa-shopping-cart"></span> {{format GiaMuaNgay}}
+                                                        VND</a></li>
+                                                <li><button style="border:none; background:0" formaction="/account/cart"
+                                                        type="submit"><i class="fa fa-heart-o"></i></button></li>
+                                                {{else}}
+                                                <li class="w-100"><button style="border:none; background:0" formaction="/account/cart"
+                                                        type="submit"><i class="fa fa-heart-o"></i></button></li>
+                                                {{/if}}
+                                                {{!-- <li><a href="#" title="quick view" class="quick-view-btn"
+                                                    data-toggle="modal" data-target="#exampleModalCenter"><i
+                                                        class="fa fa-eye"></i></a></li> --}}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- single-product-wrap end -->
+                            </form>
+                        </div>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+            <!-- Li's Section Area End Here -->
+        </div>
+    </div>
+</section>
+<!-- Li's Special Product Area End Here -->

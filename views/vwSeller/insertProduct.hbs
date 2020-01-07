@@ -1,0 +1,175 @@
+{{#section 'css'}}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/css/fileinput.min.css" media="all"
+    rel="stylesheet" type="text/css" />
+{{/section}}
+
+{{#section 'js'}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/js/fileinput.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/themes/fa/theme.min.js"></script>
+<script>
+    $('#fuMain').fileinput({
+        theme: 'fa',
+        dropZoneEnabled: false,
+        showUpload: false,
+        showRemove: false,
+        validateInitialCount: true,
+        overwriteInitial: false,
+        allowedFileExtensions: ['png', 'jpg', 'gif'],
+    });
+</script>
+<script
+    src="https://cloud.tinymce.com/5/tinymce.min.js?apiKey=ezd73nxbzc7bu6e86g2l82jbbffke0mwevwrnyvc5q8h89j6"></script>
+<script>
+    tinymce.init({
+        selector: '#txtFullDes',
+        height: 600,
+        plugins: 'paste image link autolink lists table media',
+        menubar: false,
+        toolbar: [
+            'undo redo | bold italic underline strikethrough | numlist bullist | alignleft aligncenter alignright',
+            'forecolor backcolor',
+            'table link image media',
+        ],
+    });
+</script>
+<script type="text/javascript">
+    //Hàm kiểm tra form hợp lệ
+    function isInvalidForm() {
+        var data = [];
+        data[0] = document.getElementById('txtTensanpham').value;
+        data[1] = document.getElementById('fuMain');
+        data[2] = document.getElementById('numGiakhoidiem').value;
+        data[3] = document.getElementById('numBuocgia').value;
+        data[4] = document.getElementById('numGiamuangay');
+        data[5] = document.getElementById('txtFullDes');
+        data[6] = document.getElementById('giahan');
+        var temp_0 = 1;
+        var temp_1 = 1;
+        var temp_2 = 1;
+        var temp_3 = 1;
+        var temp_4 = 1;
+        var temp_5 = 1;
+        var temp_6 = 1;
+
+        
+
+        if (data[0] === "") {
+            temp_0 = 0;
+            $('#checkTensanpham').addClass("text-danger");
+        }
+
+        if (data[1].files.length < 3) {
+            temp_1 = 0;
+             $('#checkHinhAnh').addClass("text-danger");
+        }
+
+        if (data[2] === "") {
+            temp_2 = 0;
+            $('#checkGiakhoidiem').addClass("text-danger");
+        }
+
+        if (data[3] === "") {
+            temp_3 = 0;
+            $('#checkBuocgia').addClass("text-danger");
+        }
+
+        if ((temp_1 === 1) && (temp_2 === 1) && (temp_3 === 1) && (temp_4 === 1) && (temp_5 === 1) && (temp_6 === 1) && (temp_0 === 1)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+</script>
+{{/section}}
+<!-- Begin Li's Breadcrumb Area -->
+<div class="breadcrumb-area">
+    <div class="container">
+        <div class="breadcrumb-content">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li class="active">Insert Product</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Li's Breadcrumb Area End Here -->
+
+<!-- Begin Login Content Area -->
+<div class="page-section mb-60">
+    <div class="container">
+        <div class="row">
+            <form onsubmit="return isInvalidForm()" method="POST" id="frmInsertProduct" class="frmInsertProduct"
+                enctype="multipart/form-data">
+                <div class="login-form">
+                    <h4 class="login-title">Insert Product</h4>
+                    <div class="row">
+                        <div class="col-6 mb-20">
+                            <label id="checkTensanpham">Tên sản phẩm (*)</label>
+                            <input class="mb-0" type="text" id="txtTensanpham" name="txtTensanpham"
+                                placeholder="Tên sản phẩm">
+                        </div>
+                        <div class="col-6 mb-20">
+                            <label>Loại sản phẩm (*)</label>
+                            <select class="nice-select select-search-category" id="idCat" name="idCat">
+                                {{#each lcCategories.[0]}}
+                                <option value="{{IdDanhMuc}}">{{TenDanhMuc}}</option>
+
+                                {{#each ../lcCategories.[1]}}
+                                {{#if (eq ThuocDanhMuc ../IdDanhMuc)}}
+                                <option value="{{IdDanhMuc}}">- - {{TenDanhMuc}}</option>
+                                {{/if}}
+                                {{/each}}
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="col-12 mb-20">
+                            <label id="checkHinhAnh">Hình ảnh (* ít nhất 3 ảnh)</label>
+                            <input id="fuMain" id="fuMain" name="fuMain" type="file" multiple>
+                        </div>
+                        <div class="col-4 mb-20">
+                            <label id="checkGiakhoidiem">Giá khởi điểm (*)</label>
+                            <input class="mb-0" id="numGiakhoidiem" name="numGiakhoidiem" type="number" min="0"
+                                placeholder="VND">
+                        </div>
+                        <div class="col-4 mb-20">
+                            <label id="checkBuocgia">Bước giá (*)</label>
+                            <input class="mb-20" id="numBuocgia" name="numBuocGia" type="number" min="0"
+                                placeholder="VND">
+                        </div>
+                        <div class="col-4 mb-20">
+                            <label>Giá mua ngay</label>
+                            <input class="mb-20" id="numGiamuangay" name="numGiamuangay" type="number" min="0"
+                                placeholder="VND">
+                        </div>
+
+                        <div class="col-12 mb-20">
+                            <label>Mô tả sản phẩm</label>
+                            <textarea class="mb-0" id="txtFullDes" name="FullDes"></textarea>
+                        </div>
+                        <div class="col-12 mb-20">
+                            <label>Tự động gia hạn</label>
+                            <div class="col-12 mb-10"><input value="0" type="radio" id="giahan" name="giahan" checked
+                                    class="col-2">
+                                <span>Không</span></div>
+                            <div class="col-12 mb-10"><input value="1" type="radio" id="giahan" name="giahan"
+                                    class="col-2"> <span>Có</span>
+                            </div>
+
+
+                        </div>
+
+                        <div class="col-12  mb-20">
+                            <button type="submit" id="frmSubmit" name="frmSubmit" class="register-button mt-0">Đăng sản
+                                phẩm</button>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+
+
+    </div>
+</div>
+<!-- Login Content Area End Here -->

@@ -1,0 +1,52 @@
+<div class="card shadow mb-4">
+    <h4 class="card-header">
+        Thông tin người dùng
+    </h4>
+    <div class="card-body">        
+        <form method="GET">
+        <div class="form-group">
+            <label>ID</label>
+            <a class="form-control">{{this.nguoidung.IdNguoiDung}}</a>
+        </div>
+        <div class="form-group">
+            <label>Tên đăng nhập</label>
+            <a class="form-control">{{this.nguoidung.TenDangNhap}}</a>
+        </div>
+        <div class="form-group">
+            <label>Họ và tên</label>
+            <a class="form-control">{{this.nguoidung.HoVaTen}}</a>
+        </div>
+        <div class="form-group">
+            <label>Email</label>
+            <a class="form-control">{{this.nguoidung.Email}}</a>
+        </div>
+        <div class="form-group">
+            <label>Ngày sinh</label>
+            <a class="form-control">{{this.nguoidung.NgaySinh}}</a>
+        </div>
+        <div class="form-group">
+            <label>Loại người dùng</label>
+            {{#if this.isAdmin}}
+                <a class="form-control">Admin</a>
+            {{/if}}
+            {{#if this.isBuyer}}
+                <a class="form-control">Buyer</a>
+            {{/if}}
+            {{#if this.isSeller}}
+                <a class="form-control">Seller</a>
+            {{/if}}
+        </div>
+        <div class="form-group">
+            <label>Điểm cộng</label>
+            <a class="form-control">{{this.nguoidung.DiemCong}}</a>
+        </div>
+        <div class="form-group">
+            <label>Điểm trừ</label>
+            <a class="form-control">{{this.nguoidung.DiemTru}}</a>
+        </div>
+        </form>
+    </div>
+    <button>
+        <a href="/admin/user/list">Back to user list</a>
+    </button>
+</div>

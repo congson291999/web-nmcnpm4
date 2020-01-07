@@ -1,0 +1,45 @@
+<div class="error404-area pt-30 pb-60">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="error-wrapper text-center ptb-50 pt-xs-20">
+                    <div class="error-text">
+                        {{#if (eq isConfirm 0)}}
+                        <h1>FAIL</h1>
+                        <h2>YOU CAN'T BID THIS!</h2>
+                        <p>Please don't try again!</p>
+                        {{/if}}
+                        {{#if (eq isConfirm 1)}}
+                        <h1>SUCCESS</h1>
+                        <h2>Your bid was updated on server.</h2>
+                        {{/if}}
+                        {{#if (eq isConfirm 2)}}
+                        <h1>FAIL</h1>
+                        <h2>A request was sent to seller!</h2>
+                        <p>Please waiting for response!</p>
+                        {{/if}}
+                        {{#if (eq isConfirm 3)}}
+                        
+                        <h2>A request was sent to admin!</h2>
+                        <p>Please waiting for response!</p>
+                        {{/if}}
+                        {{#if (eq isConfirm -1)}}
+                        <h1>FAIL</h1>
+                        <h2>You aren't bidder</h2>
+                        <p>You can't make this request</p>
+                        {{/if}}
+                    </div>
+                    {{#if (eq isConfirm 3)}}
+                        <div class="error-button">
+                        <a href={{url}}>Back to home</a>
+                    </div>
+                    {{else}}
+                    <div class="error-button">
+                        <a href={{url}}>Back to product</a>
+                    </div>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

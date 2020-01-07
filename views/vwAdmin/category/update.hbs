@@ -1,0 +1,26 @@
+<div class="card-body">
+  <form method="POST">
+  <div class="form-group">
+      <label for="IdDanhMuc">ID</label>
+      <input type="text" class="form-control" id="IdDanhMuc" name="IdDanhMuc" readonly value="{{this.danhmuc1.IdDanhMuc}}">
+  </div>
+  <div class="form-group">
+      <label for="TenDanhMuc">Tên danh mục</label>
+      <input type="text" class="form-control" id="TenDanhMuc" name="TenDanhMuc" placeholder="Enter category name"
+      autofocus value="{{this.danhmuc1.TenDanhMuc}}">
+  </div>
+  <div class="form-group">
+    <label for="ThuocDanhMuc">Thuộc danh mục</label>
+    <select id="ThuocDanhMuc" name="ThuocDanhMuc">
+      <option value="0">None</option>
+      {{#each this.danhmuc}} 
+        <option value="{{IdDanhMuc}}">{{TenDanhMuc}}</option>
+      {{/each}}
+    </select>
+  </div>
+  <button type="submit" class="btn btn-outline-success">
+      <i class="fa fa-check" aria-hidden="true"></i>
+      Save
+  </button>
+  </form>
+</div>

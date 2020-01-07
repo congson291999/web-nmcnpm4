@@ -1,0 +1,375 @@
+{{#section 'js'}}
+<script
+    src="https://cloud.tinymce.com/5/tinymce.min.js?apiKey=ezd73nxbzc7bu6e86g2l82jbbffke0mwevwrnyvc5q8h89j6"></script>
+<script>
+
+    tinymce.init({
+        selector: '#txtFullDes',
+        height: 350,
+        plugins: 'paste image link autolink lists table media',
+        menubar: false,
+        toolbar: [
+            'undo redo | bold italic underline strikethrough | numlist bullist | alignleft aligncenter alignright',
+            'forecolor backcolor',
+            'table link image media',
+        ],
+    });
+</script>
+<script type="text/javascript">
+    //Hàm kiểm tra form hợp lệ
+    function isInvalidForm() {
+        var editorContent = tinyMCE.get('txtFullDes').getContent();
+        if (editorContent == '') {
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+</script>
+{{/section}}
+<!-- Begin Li's Breadcrumb Area -->
+<div class="breadcrumb-area">
+    <div class="container">
+        <div class="breadcrumb-content">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li class="active">{{product.TenSanPham}}</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Li's Breadcrumb Area End Here -->
+<!-- content-wraper start -->
+<div class="content-wraper">
+    <div class="container">
+        <div class="row single-product-area">
+            <div class="col-lg-5 col-md-6">
+                <!-- Product Details Left -->
+                <div class="product-details-left">
+                    <div class="product-details-images slider-navigation-1">
+                        {{#each listImages}}
+                        <div class="lg-image">
+                            <a class="popup-img venobox vbox-item"
+                                href="/images/product/{{../product.IdSanPham}}/{{this}}.jpg" data-gall="myGallery">
+                                <img src="/images/product/{{../product.IdSanPham}}/{{this}}.jpg" alt="product image">
+                            </a>
+                        </div>
+                        {{/each}}
+                    </div>
+                    <div class="product-details-thumbs slider-thumbs-1">
+                        {{#each listImages}}
+                        <div class="sm-image"><img src="/images/product/{{../product.IdSanPham}}/{{this}}.jpg"
+                                alt="product image thumb">
+                        </div>
+                        {{/each}}
+                    </div>
+                </div>
+                <!--// Product Details Left -->
+            </div>
+
+            <div class="col-lg-7 col-md-6">
+                <div class="product-details-view-content pt-60">
+                    <div class="product-info">
+                        <h2>{{product.TenSanPham}}</h2>
+                        {{#if cogiamuangay}}
+                        <form method="POST">
+                        <div class="product-additional-info ">
+                                <button class="add-to-cart quantity" type="submit" style="background-color: crimson;color:rgb(15, 14, 14); font-weight: bold; "
+                                    formaction="/account/buynow/id={{product.IdSanPham}}/gia={{product.GiaMuaNgay}}?retUrl=/products/{{product.IdSanPham}}">Mua ngay với {{ format product.GiaMuaNgay}}</button>    
+                        </div>
+                        </form>
+                        {{/if}}
+                        <div class="rating-box pt-20">
+                            <ul class="rating rating-with-review-item">
+                                <h5 class="manufacturer">
+                                    <span>Seller: </span>
+                                    <a href="">{{NguoiBan.HoVaTen}}</a>
+                                </h5>
+                                <li><i class="fa fa-thumbs-up"></i> {{NguoiBan.DiemCong}}</li>
+                                <li><i class="fa fa-thumbs-down"></i>{{NguoiBan.DiemTru}}</li>
+                            </ul>
+                        </div>
+
+                        <div><span class="start-date1"><span class="fa fa-calendar "></span>
+                                Ngày đăng: {{product.NgayDang}}</span></div>
+
+                        <div>
+                            <span class="end-date1">expired {{product.ThoiHan}}</span>
+                        </div>
+                        <br>
+                        <div class="price-box">
+                            <span class="new-price"><span class="fa fa-gavel"></span> {{product.SoLuotRaGia}}</span>
+                            <span class="new-price new-price-21">{{format product.GiaHienTai}} VND</span>
+
+                        </div>
+
+                        <div class="rating-box pt-20">
+                            <ul class="rating rating-with-review-item">
+                                <h5 class="manufacturer">
+                                    <span>Bidder: </span>
+                                    <a href="">{{NguoiThang.HoVaTen}}</a>
+                                </h5>
+                                <li><i class="fa fa-thumbs-up"></i> {{NguoiThang.DiemCong}}</li>
+                                <li><i class="fa fa-thumbs-down"></i>{{NguoiThang.DiemTru}}</li>
+                                {{#if (eq NguoiBan.IdNguoiDung authUser.IdNguoiDung)}}
+                                <form
+                                    action="/seller/block/bidder={{NguoiThang.IdNguoiDung}}/product={{product.IdSanPham}}"
+                                    method="POST" id="frmblock"></form>
+                                <li><a href="javascript: $('#frmblock').submit();"><i
+                                            class="fa fa-remove text-danger"></i> <span class="text-danger"><b> Cấm ra
+                                                giá</b></span></a></li>
+
+                                {{/if}}
+                            </ul>
+
+                        </div>
+
+                        <div class="single-add-to-cart">
+                            <form method="POST" class="cart-quantity">
+                                <div class="quantity">
+                                    <label>Tham gia đấu giá</label>
+                                    <div class="price-box">
+
+                                        <span>Bước giá: </span>
+                                        <span> <b>{{format product.BuocGia}} </b> VND</span>
+                                    </div class="price-box">
+                                    <input id="txtId" name="txtId" style="display:none;"
+                                        value={{product.IdSanPham}}></input>
+                                    <input id="txtName" name="txtName" style="display:none;"
+                                        value={{authUser.IdNguoiDung}}></input>
+
+                                </div>
+                                {{#if (neq NguoiBan.IdNguoiDung authUser.IdNguoiDung)}}
+                                {{#if isAuthenticated}}
+                                <input type="number" name="txtSoBuocGia" id="fillmoney" value="1" min="1">
+                                <button class="add-to-cart" type="submit"
+                                    formaction="/account/deal?retUrl=/products/{{product.IdSanPham}}">Ra giá</button>
+                                {{else}}
+                                <input type="number" name="txtSoBuocGia" id="fillmoney" value="1" min="1">
+                                <button class="add-to-cart"
+                                    formaction="/account/login?retUrl=/products/{{product.IdSanPham}}">Ra giá</button>
+
+
+                                {{/if }}
+                                {{/if}}
+
+                            </form>
+                        </div>
+                        <div class="product-additional-info pt-25">
+                            <form method="POST">
+                                <input id="txtName" name="txtName" style="display:none;"
+                                    value={{authUser.IdNguoiDung}}></input>
+                                <input id="txtId" name="txtId" style="display:none;"
+                                    value={{product.IdSanPham}}></input>
+                                <button class="add-to-cart" style="border:none; background:0"
+                                    formaction="/account/cart?retUrl=/products/{{product.IdSanPham}}" type="submit"> <a
+                                        href=""><i class="fa fa-heart-o"> Thêm vào wishlist </a></i></button>
+                            </form>
+                        </div>
+                        <div class="block-reassurance">
+                            <ul>
+                                <li>
+                                    <div class="reassurance-item">
+                                        <div class="reassurance-icon">
+                                            <i class="fa fa-check-square-o"></i>
+                                        </div>
+                                        <p>Security policy</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="reassurance-item">
+                                        <div class="reassurance-icon">
+                                            <i class="fa fa-truck"></i>
+                                        </div>
+                                        <p>Delivery policy</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="reassurance-item">
+                                        <div class="reassurance-icon">
+                                            <i class="fa fa-exchange"></i>
+                                        </div>
+                                        <p> Return policy</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- content-wraper end -->
+<!-- Begin Product Area -->
+<div class="product-area pt-35">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="li-product-tab">
+                    <ul class="nav li-product-menu">
+                        <li><a class="active" data-toggle="tab" href="#description"><span>Description</span></a></li>
+                        <li><a data-toggle="tab" href="#product-details"><span>Auction's history</span></a></li>
+                        <li><a data-toggle="tab" href="#reviews"><span>Reviews</span></a></li>
+                    </ul>
+                </div>
+                <!-- Begin Li's Tab Menu Content Area -->
+            </div>
+        </div>
+        <div class="tab-content">
+            <div id="description" class="tab-pane active show" role="tabpanel">
+                <div class="product-description">
+                    <span>{{{product.ChiTiet}}}</span>
+                    {{#if (eq NguoiBan.IdNguoiDung authUser.IdNguoiDung)}}
+                    <form onsubmit="return isInvalidForm()" action="/seller/addDescription/{{product.IdSanPham}}"
+                        method="POST">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <textarea class="form-control" id="txtFullDes" name="FullDes"></textarea>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-lg btn-success btn-block">
+                            <i class="fa fa-check" aria-hidden="true"></i>
+                            Bổ sung thông tin
+                        </button>
+                    </form>
+                    {{/if}}
+                </div>
+            </div>
+            <div id="product-details" class="tab-pane" role="tabpanel">
+                <div class="product-details-manufacturer">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Thời điểm</th>
+                                <th scope="col">Người mua</th>
+                                <th scope="col">Giá</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each this.danhsachdaugia}}
+                            <tr>
+                                <td>{{NgayDauGia}}</td>
+                                <td>{{TenNguoiMua}}</td>
+                                <td>{{format Gia}}</td>
+                            </tr>
+                            {{/each}}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="reviews" class="tab-pane" role="tabpanel">
+                <div class="product-reviews">
+                    <div class="product-details-comment-block">
+
+                        <div class="comment-author-infos pt-25">
+                            <span>HTML 5</span>
+                            <em>01-12-18</em>
+                        </div>
+                        <div class="comment-details">
+                            <h4 class="title-block">Demo</h4>
+                            <p>Plaza</p>
+                        </div>
+                        <div class="review-btn">
+                            <a class="review-links" href="#" data-toggle="modal" data-target="#mymodal">Write
+                                Your Review!</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Product Area End Here -->
+
+<!-- Begin Li's Special Product Area -->
+<section class="product-area li-laptop-product Special-product pt-60 pb-45">
+    <div class="container">
+        <div class="row">
+            <!-- Begin Li's Section Area -->
+            <div class="col-lg-12">
+                <div class="li-section-title">
+                    <h2>
+                        <span>Các sản phẩm có liên quan</span>
+                    </h2>
+                </div>
+                <div class="row">
+                    <div class="special-product-active1 owl-carousel">
+                        {{#each SanPhamLienQuan}}
+                        <div class="col-lg-12">
+                            <!-- single-product-wrap start -->
+                            
+                            
+                            <div class="single-product-wrap">
+                                <div class="product-image">
+                                    <a href="/products/{{IdSanPham}}">
+                                        <img src="/images/product/{{IdSanPham}}/1.jpg" alt="Li's Product Image">
+                                    </a>
+                                </div>
+                                <div class="product_desc">
+                                    <div class="product_desc_info">
+                                        <div class="product-review">
+                                            <h5 class="manufacturer">
+                                                <span>Bidder: </span>
+                                                <a href="">{{NguoiThang.HoVaTen}}</a>
+                                            </h5>
+                                            <div class="rating-box">
+                                                <ul class="rating">
+                                                    <li><i class="fa fa-thumbs-up"></i> {{NguoiThang.DiemCong}}</li>
+                                                    <li><i class="fa fa-thumbs-down"></i>{{NguoiThang.DiemTru}}</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <h4><a class="product_name" href="/products/{{IdSanPham}}"> {{TenSanPham}} </a>
+                                        </h4>
+                                        <div><span class="start-date"><span class="fa fa-calendar"></span>
+                                                {{NgayDang}}</span></div>
+                                        <div class="price-box">
+                                            <span class="new-price"><span class="fa fa-gavel"></span>
+                                                {{SoLuotRaGia}}</span>
+                                            <span class="new-price new-price-2">{{format GiaHienTai}} VND</span>
+                                        </div>
+                                        <div class="countersection">
+                                            <span class="end-date">expired {{ThoiHan}}</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="add-actions">
+                                        <ul class="add-actions-link">
+                                            <form method="POST">
+                                                <input id="txtName" name="txtName" style="display:none;"
+                                                    value={{../authUser.IdNguoiDung}}></input>
+                                                <input id="txtId" name="txtId" style="display:none;"
+                                                    value={{IdSanPham}}></input>
+                                                {{#if GiaMuaNgay}}
+                                                <li class="add-cart active"><a href="#"><span
+                                                            class="fa fa-shopping-cart"></span>
+                                                        {{format GiaMuaNgay}}
+                                                        VND</a></li>
+                                                <li><button style="border:none; background:0" formaction="/account/cart"
+                                                        type="submit"><i class="fa fa-heart-o"></i></button></li>
+                                                {{else}}
+                                                <li class="w-100"><button style="border:none; background:0"
+                                                        formaction="/account/cart" type="submit"><i
+                                                            class="fa fa-heart-o"></i></button></li>
+                                                {{/if}}
+                                            </form>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- single-product-wrap end -->
+                        </div>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+            <!-- Li's Section Area End Here -->
+        </div>
+    </div>
+</section>
+<!-- Li's Special Product Area End Here -->
