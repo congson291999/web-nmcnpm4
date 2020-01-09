@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `onlineauction`
+-- Database: `chotot`
 --
 
 -- --------------------------------------------------------
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `danhmuc` (
   `IdDanhMuc` int(11) NOT NULL,
-  `TenDanhMuc` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `TenDanhMuc` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `ThuocDanhMuc` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -351,7 +351,7 @@ CREATE TABLE `binhluan` (
   `nguoidung_id` int(10) unsigned NOT NULL,
   `sanpham_id` int(10) unsigned NOT NULL,
   `binhluan` varchar(2000) COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
