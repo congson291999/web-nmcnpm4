@@ -227,7 +227,7 @@ router.post("/deal", async (req, res) => {
     const allow = await allowModel.single(seller[0].IdNguoiDung, sp[0].IdSanPham, user[0].IdNguoiDung);
     let confirm = 0;
     if (typeof (allow[0]) === 'undefined') {
-        if ((user[0].DiemCong * 100) / (user[0].DiemCong + user[0].DiemTru) >= 80) {
+        if ((user[0].DiemCong * 100) / (user[0].DiemCong + user[0].DiemTru) >= 80 || (user[0].DiemCong+user[0].DiemTru)===0) {
             //cập nhật thẳng lên db
             let gia = +req.body.txtSoBuocGia * sp[0].BuocGia + sp[0].GiaHienTai,
                 entity = {
