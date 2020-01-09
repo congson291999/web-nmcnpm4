@@ -57,7 +57,7 @@ router.post('/register', async (req, res) => {
         HoVaTen: req.body.txtName,
         Email: req.body.txtEmail,
         NgaySinh: dob,
-        LoaiNguoiDung: 1,
+        LoaiNguoiDung: 2,
         DiemCong: 0,
         DiemTru: 0,
     }

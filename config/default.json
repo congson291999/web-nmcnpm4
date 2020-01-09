@@ -5,7 +5,7 @@
     "port": 3306,
     "user": "root",
     "password": "luonganh",
-    "database": "onlineauction"
+    "database": "chotot"
   },
   "paginate": {
     "limit": 12
