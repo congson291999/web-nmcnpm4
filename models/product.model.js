@@ -52,6 +52,15 @@ module.exports = {
     delete entity.IdSanPham;
     return db.patch('sanpham', entity, condition);
   },
+
+  countProduct: async () => {
+    const rows = await db.load(`select count(IdSanPham) as total from sanpham`)
+    return rows[0].total;
+  },
+  countProduct2: async () => {
+    const rows = await db.load(`select count(IdSanPham) as total from sanpham where TinhTrang = 1`)
+    return rows[0].total;
+  },
   topNearExpiry: () => db.load(`SELECT * FROM sanpham WHERE NgayHetHan > SYSDATE() and TinhTrang=0  ORDER BY  datediff(CURRENT_DATE, NgayHetHan) DESC limit ${config.gettop.limit}`),
   topMostBids: () => db.load(`SELECT * FROM sanpham WHERE NgayHetHan > SYSDATE() and TinhTrang=0 ORDER BY  SoLuotRaGia DESC limit ${config.gettop.limit}`),
   topHighBid: () => db.load(`SELECT * FROM sanpham WHERE NgayHetHan > SYSDATE() and TinhTrang=0 ORDER BY GiaHienTai DESC limit ${config.gettop.limit}`)
