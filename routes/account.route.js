@@ -453,17 +453,14 @@ router.get("/productAutioning",restrict,async(req,res)=>{
             isCurrentPage: i === +page
         })
     }
-    for (c of rows) {
-        c.NgayHetHan = moment(rows[0].NgayHetHan, "YYYY-MM-DD hh:mm:ss").format("DD/MM/YYYY");
-        if (c.IdNguoiThang != bidderId)
-            c.config = 0;
-        else
-            c.config = 1
+    // for (c of rows) {
+    //     c.NgayHetHan = moment(rows[0].NgayHetHan, "YYYY-MM-DD hh:mm:ss").format("DD/MM/YYYY");
+    //     if (c.IdNguoiThang != bidderId)
+    //         c.config = 0;
+    //     else
+    //         c.config = 1
 
-
-
-
-    }
+    // }
 
     res.render("vwAccount/autioning", {
         product: rows,
@@ -603,7 +600,11 @@ router.get("/coin",restrict, async (req, res) => {
     });
 })
 
-
+router.get('/delete',restrict, async(req,res) => {
+    console.log(req.query.id);
+    const result = await productModel.del(+req.query.id);
+    res.redirect(`/account/productAutioning`);
+})
 
 
 module.exports = router;

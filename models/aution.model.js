@@ -11,6 +11,7 @@ module.exports={
         const rows = await db.load(`SELECT count(*) as total FROM (SELECT a.IdSanPham FROM daugia a,sanpham b where a.IdNguoiDung=${bidderId} and a.IdSanPham=b.IdSanPham and b.NgayHetHan>SYSDATE() and b.TinhTrang=0 group by a.IdSanPham )c`)
         return rows[0].total;
       },
-    pageAutionByBidder: (bidderId, offset) => db.load(`SELECT * FROM (SELECT a.IdSanPham,b.TenSanPham,b.GiaHienTai,b.NgayHetHan, b.IdNguoiThang FROM daugia a, sanpham b where a.IdNguoiDung=${bidderId} and a.IdSanPham=b.IdSanPham and b.NgayHetHan>SYSDATE() and b.TinhTrang=0 group by a.IdSanPham
-      ) c limit ${config.paginate.limit} OFFSET ${offset}`),
+    pageAutionByBidder: (bidderId, offset) => db.load(`select * from sanpham where IdNguoiBan = ${bidderId} limit ${config.paginate.limit} OFFSET ${offset}`),
+    // pageAutionByBidder: (bidderId, offset) => db.load(`SELECT * FROM (SELECT a.IdSanPham,b.TenSanPham,b.GiaHienTai,b.NgayHetHan, b.IdNguoiThang FROM daugia a, sanpham b where a.IdNguoiDung=${bidderId} and a.IdSanPham=b.IdSanPham and b.NgayHetHan>SYSDATE() and b.TinhTrang=0 group by a.IdSanPham
+    //   ) c limit ${config.paginate.limit} OFFSET ${offset}`),
 }
