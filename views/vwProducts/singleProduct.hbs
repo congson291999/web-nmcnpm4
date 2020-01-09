@@ -105,10 +105,11 @@
                             <form method="POST" class="cart-quantity">
                                 <div class="quantity">
                                     
-                                    {{#if (eq NguoiBan.IdNguoiDung authUser.IdNguoiDung)}}
-                                    {{else}}                                    
+                                    {{#if (eq NguoiBan.IdNguoiDung authUser.IdNguoiDung) }}
+                                    {{else}}  {{#if bought}}<h3>{{NguoiBan.SDT}}</h3> {{else}}                                
                                 <button class="add-to-cart"
                                     {{#if isAuthenticated}}formaction="/account/deal?id={{product.IdSanPham}}"{{else}}formaction="/account/login?retUrl=/products/{{product.IdSanPham}}"{{/if}}>Mua sản phẩm</button>
+                                    {{/if}}
                                     {{/if}}
                             </form>
                         </div>

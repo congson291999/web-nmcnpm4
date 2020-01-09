@@ -73,4 +73,8 @@ module.exports = {
     result=await db.load(`select count(*) as total from wishlist where IdSanPham = ${proId} and IdNguoiDung = ${userId}`);
     return result[0].total;
   },
+  proBuy: async (proId, userId) =>{
+    result=await db.load(`select count(*) as total from daugia where IdSanPham = ${proId} and IdNguoiDung = ${userId}`);
+    return result[0].total;
+  },
 };
