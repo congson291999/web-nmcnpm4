@@ -57,6 +57,7 @@ router.post('/register', async (req, res) => {
         HoVaTen: req.body.txtName,
         Email: req.body.txtEmail,
         NgaySinh: dob,
+        SDT: req.body.txtPhone,
         LoaiNguoiDung: 2,
         DiemCong: 0,
         DiemTru: 0,
@@ -139,6 +140,7 @@ router.post('/patch', restrict, async (req, res) => {
         HoVaTen: req.body.txtHoVaTen,
         Email: req.body.txtEmail,
         NgaySinh: dob,
+        SDT: req.body.txtSDT
     }
     if (req.body.txtnewpass.length != 0) {
         entity.MatKhau = hash;

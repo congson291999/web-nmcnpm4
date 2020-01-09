@@ -52,11 +52,7 @@ module.exports = {
     delete entity.IdSanPham;
     return db.patch('sanpham', entity, condition);
   },
-<<<<<<< HEAD
-  topNearExpiry: () => db.load(`SELECT * FROM sanpham WHERE TinhTrang=0  ORDER BY  NgayDang DESC limit ${config.gettop.limit}`),
-  topMostBids: () => db.load(`SELECT * FROM sanpham WHERE NgayDang > SYSDATE() and TinhTrang=0 ORDER BY  SoLuotRaGia DESC limit ${config.gettop.limit}`),
-  topHighBid: () => db.load(`SELECT * FROM sanpham WHERE TinhTrang=0 ORDER BY GiaKhoiDiem DESC limit ${config.gettop.limit}`)
-=======
+
 
   countProduct: async () => {
     const rows = await db.load(`select count(IdSanPham) as total from sanpham`)
@@ -78,5 +74,4 @@ module.exports = {
     result=await db.load(`select count(*) as total from wishlist where IdSanPham = ${proId} and IdNguoiDung = ${userId}`);
     return result[0].total;
   },
->>>>>>> 6be8b5c72e0a43d4ebb80532ff24dfcf2dfcdb87
 };

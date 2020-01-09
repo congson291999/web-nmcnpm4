@@ -78,6 +78,14 @@
                         </div>
                         <div class="input-group form-group">
                             <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-phone"></i></span>
+                            </div>
+                            <input type="text" name="txtPhone" id="txtPhone" class="form-control"
+                                placeholder="phone number">
+                            <img id="checkPhone" height="30" width="30" src="/images/required.png">
+                        </div>
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fa fa-key"></i></span>
                             </div>
                             <input type="password" name="txtPass" id="txtPass" class="form-control"
@@ -127,6 +135,8 @@
             data[4] = document.getElementById('checkAgree');			//Check Agree
             data[5] = document.getElementById('checkName');
             data[6] = document.getElementById('checkDob');
+            date[7] = document.getElementById('txtPhone').value;
+            data[8] = document.getElementById('checkPhone');
             var temp_1 = 1;
             var temp_2 = 1;
             var temp_3 = 1;
@@ -136,6 +146,7 @@
             var temp_7 = 1;
             var temp_8 = 1;
             var temp_9 = 1;
+            var temp_10 = 1;
 
             //Kiểm tra Username khác rỗng
             if (data[1] === "")
@@ -143,6 +154,9 @@
 
             if (data[5] === "")
                 temp_7 = 0;
+
+            if (data[7] === "")
+                temp_10 = 0;
 
             if (data[6] === "")
                 temp_8 = 0;
@@ -219,6 +233,11 @@
                     document.getElementById('checkDob').src = "/images/required.png";
                 else
                     document.getElementById('checkDob').src = "/images/true.png";
+
+                if (temp_10 === 0)
+                    document.getElementById('checkPhone').src = "/images/required.png";
+                else
+                    document.getElementById('checkPhone').src = "/images/true.png";
                 return false;
             }
         }
