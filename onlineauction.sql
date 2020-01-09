@@ -85,9 +85,9 @@ CREATE TABLE `daugia` (
   `Id` int(11) NOT NULL,
   `IdSanPham` int(11) NOT NULL,
   `IdNguoiDung` int(11) NOT NULL,
-  `TenNguoiMua` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Gia` int(11) NOT NULL,
-  `NgayDauGia` datetime NOT NULL
+  `TenNguoiMua` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `Gia` int(11) DEFAULT NULL,
+  `NgayDauGia` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -179,6 +179,7 @@ CREATE TABLE `nguoidung` (
   `MatKhau` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `HoVaTen` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `Email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `SDT` int(11),
   `NgaySinh` date NOT NULL,
   `LoaiNguoiDung` int(11) NOT NULL,
   `DiemCong` int(11) NOT NULL,
@@ -242,17 +243,17 @@ CREATE TABLE `sanpham` (
   `ChiTiet` varchar(5000) COLLATE utf8mb4_unicode_ci NOT NULL,
   `GiaKhoiDiem` int(11) NOT NULL,
   `NgayDang` datetime NOT NULL,
-  `NgayHetHan` datetime NOT NULL,
-  `GiaBanToiThieu` int(11) NOT NULL,
-  `GiaHienTai` int(11) NOT NULL,
+  `NgayHetHan` datetime DEFAULT NULL,
+  `GiaBanToiThieu` int(11) DEFAULT NULL,
+  `GiaHienTai` int(11) DEFAULT NULL,
   `IdNguoiBan` int(11) NOT NULL,
-  `IdNguoiThang` int(11) NOT NULL,
-  `GiaMuaNgay` int(11) NOT NULL,
-  `SoLuotRaGia` int(11) NOT NULL,
-  `BuocGia` int(11) NOT NULL,
-  `TinhTrang` int(11) NOT NULL,
-  `TuGiaHan` int(11) NOT NULL,
-  `DanhGia` int(11) NOT NULL,
+  `IdNguoiThang` int(11) DEFAULT NULL,
+  `GiaMuaNgay` int(11) DEFAULT NULL,
+  `SoLuotRaGia` int(11) DEFAULT NULL,
+  `BuocGia` int(11) DEFAULT NULL,
+  `TinhTrang` int(11) DEFAULT NULL,
+  `TuGiaHan` int(11) DEFAULT NULL,
+  `DanhGia` int(11) DEFAULT NULL,
   `SoHinh` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -307,7 +308,7 @@ CREATE TABLE `wishlist` (
   `Id` int(11) NOT NULL,
   `IdSanPham` int(11) NOT NULL,
   `TenSanPham` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `NgayHetHan` datetime NOT NULL,
+  `NgayHetHan` datetime DEFAULT NULL,
   `GiaHienTai` int(11) NOT NULL,
   `IdNguoiDung` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

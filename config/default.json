@@ -4,7 +4,11 @@
     "host": "localhost",
     "port": 3306,
     "user": "root",
+<<<<<<< HEAD
     "password": "Phucarus112",  
+=======
+    "password": "luonganh",
+>>>>>>> 6be8b5c72e0a43d4ebb80532ff24dfcf2dfcdb87
     "database": "chotot"
   },
   "paginate": {
