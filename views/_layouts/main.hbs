@@ -66,57 +66,6 @@
                         </div>
                         <!-- Header Top Left Area End Here -->
                         <!-- Begin Header Top Right Area -->
-                        <div class="col-lg-9 col-md-8">
-                            <div class="header-top-right">
-                                <form action="/account/logout" method="POST" id="frmLogout"></form>
-                                <ul class="ht-menu">
-                                    {{#if isAuthenticated}}
-                                    <li>
-                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Hi <b>{{authUser.TenDangNhap}}</b>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                            <a class="dropdown-item" href="/account/profile">
-                                                <i class="fa fa-user" aria-hidden="true"></i>
-                                                Thông tin cá nhân
-                                            </a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="/account/productAutioning">
-                                                <i class="fa fa-legal" aria-hidden="true"></i>
-                                                Sản phẩm đang bán
-                                            </a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="/seller/insertProduct">
-                                                <i class="fa fa-plus" aria-hidden="true"></i>
-                                                Đăng bán sản phẩm
-                                            </a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="/seller/productAuctioned">
-                                                <i class="fa fa-check" aria-hidden="true"></i>
-                                                Sản phẩm đã có người mua
-                                            </a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="javascript: $('#frmLogout').submit();">
-                                                <i class="fa fa-sign-out" aria-hidden="true"></i>
-                                                Logout
-                                            </a>
-                                        </div>
-                                    </li>
-                                    {{else}}
-                                    <li>
-                                        <div class="ht-currency-trigger"><a href="/account/login">Đăng nhập</a></div>
-                                    </li>
-                                    <li>
-                                        <div class="ht-currency-trigger"><a href="/account/register">Đăng ký</a></div>
-                                    </li>
-
-                                    {{/if}}
-                                    <!-- Language Area End Here -->
-                                </ul>
-                                </form>
-                            </div>
-                        </div>
                         <!-- Header Top Right Area End Here -->
                     </div>
                 </div>
@@ -166,57 +115,6 @@
                                             <i class="fa fa-heart-o"></i>
                                         </a>
                                     </li>
-                                    <!-- Header Middle Wishlist Area End Here -->
-                                    {{!-- <!-- Begin Header Mini Cart Area -->
-                                    <li class="hm-minicart">
-                                        <div class="hm-minicart-trigger">
-                                            <span class="item-icon"></span>
-                                            <span class="item-text">160.000 VND
-                                                <span class="cart-item-count">2</span>
-                                            </span>
-                                        </div>
-                                        <span></span>
-                                        <div class="minicart">
-                                            <ul class="minicart-product-list">
-                                                <li>
-                                                    <a href="javascript:;" class="minicart-product-image">
-                                                        <img src="/images/product/small-size/3.jpg" alt="cart products">
-                                                    </a>
-                                                    <div class="minicart-product-details">
-                                                        <h6><a href="javascript:;">Tay cầm xbox</a></h6>
-                                                        <span>Your bid: 60.000 x 1</span>
-                                                    </div>
-                                                    <button class="close">
-                                                        <i class="fa fa-close"></i>
-                                                    </button>
-                                                </li>
-                                                <li>
-                                                    <a href="javascript:;" class="minicart-product-image">
-                                                        <img src="/images/product/small-size/4.jpg" alt="cart products">
-                                                    </a>
-                                                    <div class="minicart-product-details">
-                                                        <h6><a href="javascript:;">Màn hình LG</a></h6>
-                                                        <span>Your bid: 100.000 x 1</span>
-                                                    </div>
-                                                    <button class="close">
-                                                        <i class="fa fa-close"></i>
-                                                    </button>
-                                                </li>
-                                            </ul>
-                                            <p class="minicart-total">SUBTOTAL: <span>160.000 VND</span></p>
-                                            <div class="minicart-button">
-                                                <a href="shopping-cart.html"
-                                                    class="li-button li-button-dark li-button-fullwidth li-button-sm">
-                                                    <span>View Full Cart</span>
-                                                </a>
-                                                <a href="checkout.html"
-                                                    class="li-button li-button-fullwidth li-button-sm">
-                                                    <span>Checkout</span>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </li> --}}
-                                    <!-- Header Mini Cart Area End Here -->
                                 </ul>
                             </div>
                             {{/if}}
@@ -238,11 +136,90 @@
                                 <nav>
                                     <ul>
                                         <li><a href="/">Home</a></li>
+                                        <li>
+                                            <ul class="ht-menu">
+                                                <li>
+                                                    <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:black">
+                                                        Product</b>
+                                                    </a>
+                                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                                        <div id="cate-toggle" class="category-menu-list">
+                                                            <ul>
+                                                                {{#each lcCategories.[0]}}
+                                                                <li class="right-menu"><a href="/categories/{{IdDanhMuc}}/products">{{TenDanhMuc}}</a>
+                                                                    <ul class="cat-mega-menu">
+                                                                        <li class="right-menu cat-mega-title">
+                                                                            <ul>
+                                                                                {{#each ../lcCategories.[1]}}
+                                                                                {{#if (eq ThuocDanhMuc ../IdDanhMuc)}}
+                                                                                <li><a href="/categories/{{IdDanhMuc}}/products">{{TenDanhMuc}}</a></li>
+                                                                                {{/if}}
+                                                                                {{/each}}
+                                                                            </ul>
+                                                                        </li>
+                                                                    </ul>
+                                                                </li>
+                                                                {{/each}}
+
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <!-- Language Area End Here -->
+                                            </ul>
+                                        </li>
                                         <li><a href="/about">About Us</a></li>
                                         <li><a href="/faq">FAQ</a></li>
                                         <!-- Begin Header Bottom Menu Information Area -->
-                                        <li class="hb-info f-right p-0 d-sm-none d-lg-block">
-                                            <span>227 Nguyễn Văn Cừ, Quận 5, Tp Hồ Chí Minh </span>
+                                        <li class="hb-info f-right d-sm-none d-lg-block">
+                                            {{!-- <span>227 Nguyễn Văn Cừ, Quận 5, Tp Hồ Chí Minh </span> --}}
+                                            <form action="/account/logout" method="POST" id="frmLogout"></form>
+                                            <ul class="ht-menu text-dark">
+                                                {{#if isAuthenticated}}
+                                                <li>
+                                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:black">
+                                                        Hi <b>{{authUser.TenDangNhap}}</b>
+                                                    </a>
+                                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                                        <a class="dropdown-item" href="/account/profile" style="color:black">
+                                                            <i class="fa fa-user" aria-hidden="true"></i>
+                                                            Thông tin cá nhân
+                                                        </a>
+                                                        <div class="dropdown-divider"></div>
+                                                        <a class="dropdown-item" href="/account/productAutioning" style="color:black">
+                                                            <i class="fa fa-legal" aria-hidden="true"></i>
+                                                            Sản phẩm đang bán
+                                                        </a>
+                                                        <div class="dropdown-divider"></div>
+                                                        <a class="dropdown-item" href="/seller/insertProduct" style="color:black">
+                                                            <i class="fa fa-plus" aria-hidden="true"></i>
+                                                            Đăng bán sản phẩm
+                                                        </a>
+                                                        <div class="dropdown-divider"></div>
+                                                        <a class="dropdown-item" href="/seller/productAuctioned" style="color:black">
+                                                            <i class="fa fa-check" aria-hidden="true"></i>
+                                                            Sản phẩm đã có người mua
+                                                        </a>
+                                                        <div class="dropdown-divider"></div>
+                                                        <a class="dropdown-item" href="javascript: $('#frmLogout').submit();" style="color:black">
+                                                            <i class="fa fa-sign-out" aria-hidden="true"></i>
+                                                            Logout
+                                                        </a>
+                                                    </div>
+                                                </li>
+                                                {{else}}
+                                                <li>
+                                                    <div class="ht-currency-trigger"><a href="/account/login" style="color:black">Đăng nhập</a></div>
+                                                </li>
+                                                <li>
+                                                    <div class="ht-currency-trigger"><a href="/account/register" style="color:black">Đăng ký</a></div>
+                                                </li>
+
+                                                {{/if}}
+                                                <!-- Language Area End Here -->
+                                            </ul>
                                         </li>
                                         <!-- Header Bottom Menu Information Area End Here -->
                                     </ul>
@@ -551,6 +528,14 @@
     <script src="/js/scrollUp.min.js"></script>
     <!-- Main/Activator js -->
     <script src="/js/main.js"></script>
+    <script>
+        $(document).ready(function(){
+            $(#list).click(function(){
+                $(#cate).toggle();
+            });
+        });
+    });
+    </script>
     {{{_sections.js}}}
 </body>
 
