@@ -105,11 +105,11 @@
                             <form method="POST" class="cart-quantity">
                                 <div class="quantity">
                                     
-                
-                               
+                                    {{#if (eq NguoiBan.IdNguoiDung authUser.IdNguoiDung)}}
+                                    {{else}}
                                 <button class="add-to-cart"
                                     formaction="/account/login?retUrl=/products/{{product.IdSanPham}}">Mua sản phẩm</button>
-
+                                    {{/if}}
                             </form>
                         </div>
                         <div class="product-additional-info pt-25">
@@ -118,9 +118,13 @@
                                     value={{authUser.IdNguoiDung}}></input>
                                 <input id="txtId" name="txtId" style="display:none;"
                                     value={{product.IdSanPham}}></input>
+                                     {{#if (eq NguoiBan.IdNguoiDung authUser.IdNguoiDung)}}
+                                    {{else}}
                                 <button class="add-to-cart" style="border:none; background:0"
                                     formaction="/account/cart?retUrl=/products/{{product.IdSanPham}}" type="submit"> <a
                                         href=""><i class="fa fa-heart-o"> Thêm vào wishlist </a></i></button>
+                                    {{/if}}
+
                             </form>
                         </div>
                         <div class="block-reassurance">

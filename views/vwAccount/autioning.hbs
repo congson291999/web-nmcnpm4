@@ -19,30 +19,25 @@
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th class="cart-product-id">ProducId</th>
-                                                <th class="cart-product-name">ProductName</th>
-                                                <th> ngayhethan</th>
-                                                <th class="li-product-add-cart">gia hien tai</th>
+                                                <th class="cart-product-id">Mã sản phẩm</th>
+                                                <th class="cart-product-name">Tên sản phẩm</th>
+                                                <th> Hình ảnh </th>
+                                                <th class="li-product-add-cart">Giá hiện tại</th>
+                                                <th class="li-product-add-cart">Xóa</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             {{#each product}}
                                             
-                                                {{#if config }}
-                                                <tr class="table-success">
+                                           
+                                                <tr >
                                                 <td>{{IdSanPham}}</td>
                                                 <td><a href="/products/{{IdSanPham}}">{{TenSanPham}}</a></td>
-                                                <td>{{NgayHetHan}}</td>
-                                                <td>{{format GiaHienTai}}</td>
+                                                <td><img src="/images/product/{{IdSanPham}}/1.jpg" style="width: 150px; height: 150px;" alt=""></td>
+                                                <td>{{format GiaKhoiDiem}}</td>
+                                                <td><a href="/account/delete?id={{IdSanPham}}"><i class="fa fa-times" aria-hidden="true"></i></a></td>
                                                 </tr>
-                                                {{else}}
-                                                <tr class="table-danger">
-                                                <td>{{IdSanPham}}</td>
-                                                <td><a href="/products/{{IdSanPham}}">{{TenSanPham}}</a></td>
-                                                <td>{{NgayHetHan}}</td>
-                                                <td>{{format GiaHienTai}}</td>
-                                                </tr>
-                                                {{/if}}
+                                                
                                                 
                                             
                                             {{/each}}

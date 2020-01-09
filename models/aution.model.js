@@ -17,4 +17,6 @@ module.exports = {
     const rows = await db.load(`select count(Id) as total from daugia`)
     return rows[0].total;
   },
+  pageAutionByBidder: (bidderId, offset) => db.load(`select * from sanpham where IdNguoiBan = ${bidderId} limit ${config.paginate.limit} OFFSET ${offset}`),
+
 }
