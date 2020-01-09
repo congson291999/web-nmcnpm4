@@ -63,7 +63,7 @@ router.get('/:id', async (req, res) => {
         total=1;
         bought=0;
     }
-    console.log(nguoiban[0]);
+
     res.render('vwProducts/singleProduct', {
         total,
         bought,

@@ -81,4 +81,5 @@ module.exports = {
     result=await db.load(`select count(*) as total from daugia where IdSanPham = ${proId} and IdNguoiDung = ${userId}`);
     return result[0].total;
   },
+  proBuying: (userId) => db.load(`select * from daugia d, sanpham s where d.IdNguoiDung = ${userId} and d.IdSanPham = s.IdSanPham`),
 };

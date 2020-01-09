@@ -625,4 +625,11 @@ router.get('/delete/wishlist',restrict, async(req,res) => {
 })
 
 
+router.get('/buyingProduct', restrict, async(req,res) => {
+    const products = await productModel.proBuying(req.session.authUser.IdNguoiDung);
+    res.render('vwAccount/buying', {
+        products
+    });
+})
+
 module.exports = router;
