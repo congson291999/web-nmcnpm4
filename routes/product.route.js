@@ -14,10 +14,9 @@ const aution=require('../models/aution.model');
 const router = express.Router();
 
 router.get('/:id', async (req, res) => {
-    
-    
     let rows = await productModel.single(req.params.id);
     let bidders=await aution.single(req.params.id);
+    let comments = await productModel.commentbyPro(req.params.id);
     let [rows1, nguoiban, nguoithang] = await Promise.all([
         productModel.allByCat(rows[0].LoaiSanPham),
         userModel.single(rows[0].IdNguoiBan),
@@ -63,11 +62,20 @@ router.get('/:id', async (req, res) => {
         NguoiThang: nguoithang[0],
         listImages: listImages,
         danhsachdaugia:bidders,
-        cogiamuangay:muangay
+        cogiamuangay:muangay,
+        comments
     });
 })
 
+router.post('/comment', async (req,res) => {
+    const results = await productModel.addComment({
+        nguoidung_id: req.session.authUser.IdNguoiDung,
+        sanpham_id: req.body.sanpham_id,
+        binhluan: req.body.binhluan
+    });
 
+    res.redirect(`/products/${req.body.sanpham_id}`);
+})
 
 
 module.exports = router;

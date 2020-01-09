@@ -54,5 +54,9 @@ module.exports = {
   },
   topNearExpiry: () => db.load(`SELECT * FROM sanpham WHERE NgayHetHan > SYSDATE() and TinhTrang=0  ORDER BY  datediff(CURRENT_DATE, NgayHetHan) DESC limit ${config.gettop.limit}`),
   topMostBids: () => db.load(`SELECT * FROM sanpham WHERE NgayHetHan > SYSDATE() and TinhTrang=0 ORDER BY  SoLuotRaGia DESC limit ${config.gettop.limit}`),
-  topHighBid: () => db.load(`SELECT * FROM sanpham WHERE NgayHetHan > SYSDATE() and TinhTrang=0 ORDER BY GiaHienTai DESC limit ${config.gettop.limit}`)
+  topHighBid: () => db.load(`SELECT * FROM sanpham WHERE NgayHetHan > SYSDATE() and TinhTrang=0 ORDER BY GiaHienTai DESC limit ${config.gettop.limit}`),
+  //lay comment theo id cuar san pham
+  commentbyPro: (id) => db.load(`select * from binhluan b, nguoidung n where b.sanpham_id = ${id} and n.IDNguoiDung = b.nguoidung_id`),
+  //them binh luan
+  addComment: (entity) => db.add('binhluan',entity),
 };
