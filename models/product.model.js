@@ -53,6 +53,9 @@ module.exports = {
     return db.patch('sanpham', entity, condition);
   },
 
+  topNearExpiry: () => db.load(`SELECT * FROM sanpham WHERE TinhTrang=0  ORDER BY  NgayDang DESC limit ${config.gettop.limit}`),
+  topMostBids: () => db.load(`SELECT * FROM sanpham WHERE NgayDang > SYSDATE() and TinhTrang=0 ORDER BY  SoLuotRaGia DESC limit ${config.gettop.limit}`),
+  topHighBid: () => db.load(`SELECT * FROM sanpham WHERE TinhTrang=0 ORDER BY GiaKhoiDiem DESC limit ${config.gettop.limit}`),
 
   countProduct: async () => {
     const rows = await db.load(`select count(IdSanPham) as total from sanpham`)
@@ -62,9 +65,9 @@ module.exports = {
     const rows = await db.load(`select count(IdSanPham) as total from sanpham where TinhTrang = 1`)
     return rows[0].total;
   },
-  topNearExpiry: () => db.load(`SELECT * FROM sanpham WHERE NgayHetHan > SYSDATE() and TinhTrang=0  ORDER BY  datediff(CURRENT_DATE, NgayHetHan) DESC limit ${config.gettop.limit}`),
-  topMostBids: () => db.load(`SELECT * FROM sanpham WHERE NgayHetHan > SYSDATE() and TinhTrang=0 ORDER BY  SoLuotRaGia DESC limit ${config.gettop.limit}`),
-  topHighBid: () => db.load(`SELECT * FROM sanpham WHERE NgayHetHan > SYSDATE() and TinhTrang=0 ORDER BY GiaHienTai DESC limit ${config.gettop.limit}`),
+  // topNearExpiry: () => db.load(`SELECT * FROM sanpham WHERE NgayHetHan > SYSDATE() and TinhTrang=0  ORDER BY  datediff(CURRENT_DATE, NgayHetHan) DESC limit ${config.gettop.limit}`),
+  // topMostBids: () => db.load(`SELECT * FROM sanpham WHERE NgayHetHan > SYSDATE() and TinhTrang=0 ORDER BY  SoLuotRaGia DESC limit ${config.gettop.limit}`),
+  // topHighBid: () => db.load(`SELECT * FROM sanpham WHERE NgayHetHan > SYSDATE() and TinhTrang=0 ORDER BY GiaHienTai DESC limit ${config.gettop.limit}`),
   //lay comment theo id cuar san pham
   commentbyPro: (id) => db.load(`select * from binhluan b, nguoidung n where b.sanpham_id = ${id} and n.IDNguoiDung = b.nguoidung_id`),
   //them binh luan
@@ -72,6 +75,10 @@ module.exports = {
   delWishlist: (proId, userId) => db.load(`delete from  wishlist where IdSanPham = ${proId} and IdNguoiDung = ${userId}`),
   proByWishlist: async (proId, userId) =>{
     result=await db.load(`select count(*) as total from wishlist where IdSanPham = ${proId} and IdNguoiDung = ${userId}`);
+    return result[0].total;
+  },
+  proBuy: async (proId, userId) =>{
+    result=await db.load(`select count(*) as total from daugia where IdSanPham = ${proId} and IdNguoiDung = ${userId}`);
     return result[0].total;
   },
 };

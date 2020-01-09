@@ -57,15 +57,16 @@ router.get('/:id', async (req, res) => {
     
     if(req.session.isAuthenticated === true ){
         total = await productModel.proByWishlist(req.params.id, req.session.authUser.IdNguoiDung);
+        bought= await productModel.proBuy(req.params.id, req.session.authUser.IdNguoiDung);
     }
     else{
         total=1;
+        bought=0;
     }
-
-    
-
+    console.log(nguoiban[0]);
     res.render('vwProducts/singleProduct', {
         total,
+        bought,
         SanPhamLienQuan: rows1,
         product: rows[0],
         NguoiBan: nguoiban[0],
