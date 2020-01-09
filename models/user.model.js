@@ -24,6 +24,10 @@ module.exports = {
     delete entity.IdNguoiDung;
     return db.patch('nguoidung', entity, condition);
   },
+  countRegister: async () => {
+    const rows = await db.load(`select count(IdNguoiDung) as total from nguoidung`)
+    return rows[0].total;
+  },
 
   allOfId: id => db.load(`select * from nguoidung where ThuocDanhMuc = ${id}`) 
   

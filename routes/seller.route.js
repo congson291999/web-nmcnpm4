@@ -10,9 +10,6 @@ const auctionModel = require('../models/aution.model');
 const fs = require('fs');
 const nodemailer = require('nodemailer');
 
-
-
-
 const router = express.Router();
 
 let transporter = nodemailer.createTransport({

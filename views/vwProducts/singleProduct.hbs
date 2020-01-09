@@ -2,7 +2,6 @@
 <script
     src="https://cloud.tinymce.com/5/tinymce.min.js?apiKey=ezd73nxbzc7bu6e86g2l82jbbffke0mwevwrnyvc5q8h89j6"></script>
 <script>
-
     tinymce.init({
         selector: '#txtFullDes',
         height: 350,
@@ -93,66 +92,23 @@
 
                         <div><span class="start-date1"><span class="fa fa-calendar "></span>
                                 Ngày đăng: {{product.NgayDang}}</span></div>
-
-                        <div>
-                            <span class="end-date1">expired {{product.ThoiHan}}</span>
-                        </div>
                         <br>
                         <div class="price-box">
-                            <span class="new-price"><span class="fa fa-gavel"></span> {{product.SoLuotRaGia}}</span>
+                         
                             <span class="new-price new-price-21">{{format product.GiaHienTai}} VND</span>
 
                         </div>
 
-                        <div class="rating-box pt-20">
-                            <ul class="rating rating-with-review-item">
-                                <h5 class="manufacturer">
-                                    <span>Bidder: </span>
-                                    <a href="">{{NguoiThang.HoVaTen}}</a>
-                                </h5>
-                                <li><i class="fa fa-thumbs-up"></i> {{NguoiThang.DiemCong}}</li>
-                                <li><i class="fa fa-thumbs-down"></i>{{NguoiThang.DiemTru}}</li>
-                                {{#if (eq NguoiBan.IdNguoiDung authUser.IdNguoiDung)}}
-                                <form
-                                    action="/seller/block/bidder={{NguoiThang.IdNguoiDung}}/product={{product.IdSanPham}}"
-                                    method="POST" id="frmblock"></form>
-                                <li><a href="javascript: $('#frmblock').submit();"><i
-                                            class="fa fa-remove text-danger"></i> <span class="text-danger"><b> Cấm ra
-                                                giá</b></span></a></li>
-
-                                {{/if}}
-                            </ul>
-
-                        </div>
+                
 
                         <div class="single-add-to-cart">
                             <form method="POST" class="cart-quantity">
                                 <div class="quantity">
-                                    <label>Tham gia đấu giá</label>
-                                    <div class="price-box">
-
-                                        <span>Bước giá: </span>
-                                        <span> <b>{{format product.BuocGia}} </b> VND</span>
-                                    </div class="price-box">
-                                    <input id="txtId" name="txtId" style="display:none;"
-                                        value={{product.IdSanPham}}></input>
-                                    <input id="txtName" name="txtName" style="display:none;"
-                                        value={{authUser.IdNguoiDung}}></input>
-
-                                </div>
-                                {{#if (neq NguoiBan.IdNguoiDung authUser.IdNguoiDung)}}
-                                {{#if isAuthenticated}}
-                                <input type="number" name="txtSoBuocGia" id="fillmoney" value="1" min="1">
-                                <button class="add-to-cart" type="submit"
-                                    formaction="/account/deal?retUrl=/products/{{product.IdSanPham}}">Ra giá</button>
-                                {{else}}
-                                <input type="number" name="txtSoBuocGia" id="fillmoney" value="1" min="1">
+                                    
+                
+                               
                                 <button class="add-to-cart"
-                                    formaction="/account/login?retUrl=/products/{{product.IdSanPham}}">Ra giá</button>
-
-
-                                {{/if }}
-                                {{/if}}
+                                    formaction="/account/login?retUrl=/products/{{product.IdSanPham}}">Mua sản phẩm</button>
 
                             </form>
                         </div>
@@ -209,9 +165,9 @@
             <div class="col-lg-12">
                 <div class="li-product-tab">
                     <ul class="nav li-product-menu">
-                        <li><a class="active" data-toggle="tab" href="#description"><span>Description</span></a></li>
-                        <li><a data-toggle="tab" href="#product-details"><span>Auction's history</span></a></li>
-                        <li><a data-toggle="tab" href="#reviews"><span>Reviews</span></a></li>
+                        <li><a class="active" data-toggle="tab" href="#description"><span>Mô tả chi tiết</span></a></li>
+                        <li><a data-toggle="tab" href="#product-details"><span>Bình luận</span></a></li>
+                        {{!-- <li><a data-toggle="tab" href="#reviews"><span>Reviews</span></a></li> --}}
                     </ul>
                 </div>
                 <!-- Begin Li's Tab Menu Content Area -->
@@ -239,10 +195,28 @@
             </div>
             <div id="product-details" class="tab-pane" role="tabpanel">
                 <div class="product-details-manufacturer">
-                    //bình luận
-                </div>
+                    {{#each comments}}
+                    <div class="card mb-4" >
+                        <div class="card-header" style="font-size: medium; font-weight: bold;">{{HoVaTen}}</div>
+                        <div class="card-body">
+                            <p class="card-tittle">{{binhluan}}</p>
+                        </div>
+                    </div>
+                    {{/each}}
+
+                    <form action="/products/comment" method="POST">
+                        <div class="form-group">
+                            <label for="binhluan" class="h5 mb-3">Bình luận của bạn</label>
+                            <input type="text" class="form-control" id="binhluan" name="binhluan" placeholder="Nhập bình luận">
+                            <input type="hidden" name="nguoidung_id" value="{{authUser.IdNguoiDung}}">
+                            <input type="hidden" name="sanpham_id" value="{{product.IdSanPham}}">
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Gửi</button>
+                    </form>
+                    </div>
             </div>
-            <div id="reviews" class="tab-pane" role="tabpanel">
+            {{!-- <div id="reviews" class="tab-pane" role="tabpanel">
                 <div class="product-reviews">
                     <div class="product-details-comment-block">
 
@@ -261,7 +235,7 @@
 
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 </div>
@@ -294,29 +268,18 @@
                                 <div class="product_desc">
                                     <div class="product_desc_info">
                                         <div class="product-review">
-                                            <h5 class="manufacturer">
-                                                <span>Bidder: </span>
-                                                <a href="">{{NguoiThang.HoVaTen}}</a>
-                                            </h5>
-                                            <div class="rating-box">
-                                                <ul class="rating">
-                                                    <li><i class="fa fa-thumbs-up"></i> {{NguoiThang.DiemCong}}</li>
-                                                    <li><i class="fa fa-thumbs-down"></i>{{NguoiThang.DiemTru}}</li>
-                                                </ul>
-                                            </div>
+                                            
+                                            
                                         </div>
                                         <h4><a class="product_name" href="/products/{{IdSanPham}}"> {{TenSanPham}} </a>
                                         </h4>
                                         <div><span class="start-date"><span class="fa fa-calendar"></span>
                                                 {{NgayDang}}</span></div>
                                         <div class="price-box">
-                                            <span class="new-price"><span class="fa fa-gavel"></span>
-                                                {{SoLuotRaGia}}</span>
+                                            
                                             <span class="new-price new-price-2">{{format GiaHienTai}} VND</span>
                                         </div>
-                                        <div class="countersection">
-                                            <span class="end-date">expired {{ThoiHan}}</span>
-                                        </div>
+                                      
                                     </div>
 
                                     <div class="add-actions">
@@ -354,4 +317,3 @@
         </div>
     </div>
 </section>
-<!-- Li's Special Product Area End Here -->
