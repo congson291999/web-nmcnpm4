@@ -72,5 +72,5 @@ module.exports = {
   proByWishlist: async (proId, userId) =>{
     result=await db.load(`select count(*) as total from wishlist where IdSanPham = ${proId} and IdNguoiDung = ${userId}`);
     return result[0].total;
-  } 
+  },
 };

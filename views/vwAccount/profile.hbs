@@ -4,7 +4,7 @@
     </h4>
     <div class="card-body">
         
-        <form method="POST">
+        <form method="POST" novalidate>
             {{#if err_message}}
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -13,9 +13,13 @@
           {{err_message}}
         </div>
         {{/if}}
-        <div class="form-group">
+        <div class="form-group d-none" >
             <label for="IdNguoiDung">#</label>
             <input type="text" class="form-control" id="txtIdNguoiDung"name="txtIdNguoiDung" readonly value="{{this.infor.IdNguoiDung}}" >
+        </div>
+        <div class="form-group" >
+            <label for="IdNguoiDung">Tên đăng nhập</label>
+            <input type="text" class="form-control" id="txtTenDangNhap"name="txtTenDangNhap" readonly value="{{this.infor.TenDangNhap}}" >
         </div>
         <div class="form-group">
             <label for="HoVaTen">Tên người dùng</label>

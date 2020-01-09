@@ -128,35 +128,37 @@ router.get('/profile', restrict, async (req, res) => {
 router.post('/account/del', async (req, res) => {
 
 })
-router.post('/patch',restrict, async (req, res) => {
+router.post('/patch', restrict, async (req, res) => {
     const dob = moment(req.body.txtNgaySinh, 'DD/MM/YYYY').format('YYYY-MM-DD');
-    
-    
+
+
     const hash = bcrypt.hashSync(req.body.txtnewpass, 10);
-    
+
     entity = {
         IdNguoiDung: req.body.txtIdNguoiDung,
         HoVaTen: req.body.txtHoVaTen,
         Email: req.body.txtEmail,
         NgaySinh: dob,
-     }
-     if (req.body.txtnewpass.length!=0)
-     entity.MatKhau=hash;
-    console.log(entity);
-    
-    const user = await userModel.single(+res.locals.authUser.IdNguoiDung);
-     console.log(user);
-    const rs = bcrypt.compareSync(req.body.txtpass, user[0].MatKhau);
-    if (rs === true) {
+    }
+    if (req.body.txtnewpass.length != 0) {
+        entity.MatKhau = hash;
+        console.log(entity);
 
-        const result = await userModel.patch(entity);
+        const user = await userModel.single(+res.locals.authUser.IdNguoiDung);
+        console.log(user);
+        const rs = bcrypt.compareSync(req.body.txtpass, user[0].MatKhau);
+        if (rs === false) {
+            delete user[0].MatKhau;
+
+            user[0].NgaySinh = moment(user[0].NgaySinh, "YYYY-MM-DD hh:mm:ss").format("DD/MM/YYYY");
+            return res.render('vwAccount/profile', {
+                infor: user[0],
+                err_message: 'wrong passwords'
+            })
+        }
     }
-    else{
-        return res.render('vwAccount/profile',{
-            
-            err_message: 'wrong passwords'
-        })
-    }
+    const result = await userModel.patch(entity);
+
     res.redirect('/account/profile');
 })
 
@@ -207,17 +209,16 @@ router.get("/wishlist", restrict, async (req, res) => {
 
 })
 
-router.post("/cart",restrict, async (req, res) => {
+router.post("/cart", restrict, async (req, res) => {
     console.log(req.body.txtId);
     let entity = await productModel.cartinf(+req.body.txtId);
-    entity[0].IdNguoiDung=res.locals.authUser.IdNguoiDung;
+    entity[0].IdNguoiDung = res.locals.authUser.IdNguoiDung;
     console.log(entity);
-    if (req.session.isAuthenticated!=false)
+    if (req.session.isAuthenticated != false)
         cart.add(entity);
     const url = req.query.retUrl || '/';
     res.redirect(url);
 })
-
 
 router.post("/deal", async(req, res)=>{
     id=+req.query.id;
@@ -332,7 +333,7 @@ router.post("/deal", async(req, res)=>{
 
 
 
-router.post("/buynow/id=:id1/gia=:id2",restrict, async (req, res) => {
+router.post("/buynow/id=:id1/gia=:id2", restrict, async (req, res) => {
     const sp = await productModel.single(+req.params.id1);
     const user = await userModel.single(+res.locals.authUser.IdNguoiDung);
     const seller = await userModel.single(sp[0].IdNguoiBan);
@@ -342,26 +343,26 @@ router.post("/buynow/id=:id1/gia=:id2",restrict, async (req, res) => {
         if ((user[0].DiemCong * 100) / (user[0].DiemCong + user[0].DiemTru) >= 80) {
             //cập nhật thẳng lên db
             let gia = +req.params.id2,
-            entity = {
-                IdSanPham: req.params.id1,
-                IdNguoiDung: +res.locals.authUser.IdNguoiDung,
-                TenNguoiMua: user[0].HoVaTen,
-                Gia: gia,
-                NgayDauGia: moment().format("YYYY-MM-DD hh:mm:ss")
-            }
+                entity = {
+                    IdSanPham: req.params.id1,
+                    IdNguoiDung: +res.locals.authUser.IdNguoiDung,
+                    TenNguoiMua: user[0].HoVaTen,
+                    Gia: gia,
+                    NgayDauGia: moment().format("YYYY-MM-DD hh:mm:ss")
+                }
             await aution.add(entity);
 
-            let maxaution=await aution.maxaution(+req.body.txtId);
-            if(maxaution[0]!=null){
-            maxaution[0].SoLuotRaGia=maxaution[0].SoLuotRaGia+1;
-            maxaution[0].TinhTrang=1;
-            maxaution[0].GiaHienTai=gia;
-            const l= await productModel.patch(maxaution[0]);
-            
-        }
-        console.log(maxaution);
+            let maxaution = await aution.maxaution(+req.body.txtId);
+            if (maxaution[0] != null) {
+                maxaution[0].SoLuotRaGia = maxaution[0].SoLuotRaGia + 1;
+                maxaution[0].TinhTrang = 1;
+                maxaution[0].GiaHienTai = gia;
+                const l = await productModel.patch(maxaution[0]);
 
-            
+            }
+            console.log(maxaution);
+
+
 
             confirm = 1;
             let mail = await transporter.sendMail({
@@ -393,23 +394,23 @@ router.post("/buynow/id=:id1/gia=:id2",restrict, async (req, res) => {
         let gia = +req.params.id2;
         entity = {
             IdSanPham: +req.params.id1,
-                IdNguoiDung: +res.locals.authUser.IdNguoiDung,
-                TenNguoiMua: user[0].HoVaTen,
-                Gia: gia,
-                NgayDauGia: moment().format("YYYY-MM-DD hh:mm:ss")
-           
+            IdNguoiDung: +res.locals.authUser.IdNguoiDung,
+            TenNguoiMua: user[0].HoVaTen,
+            Gia: gia,
+            NgayDauGia: moment().format("YYYY-MM-DD hh:mm:ss")
+
         }
         await aution.add(entity);
-        let maxaution=await aution.maxaution(+req.params.id1);
-            if(maxaution[0]!=null){
-            maxaution[0].SoLuotRaGia=maxaution[0].SoLuotRaGia+1;
-            maxaution[0].TinhTrang=1;
-            maxaution[0].GiaHienTai=gia;
+        let maxaution = await aution.maxaution(+req.params.id1);
+        if (maxaution[0] != null) {
+            maxaution[0].SoLuotRaGia = maxaution[0].SoLuotRaGia + 1;
+            maxaution[0].TinhTrang = 1;
+            maxaution[0].GiaHienTai = gia;
 
-            const l= await productModel.patch(maxaution[0]);
+            const l = await productModel.patch(maxaution[0]);
 
         }
-            
+
         console.log(maxaution);
 
         confirm = 1;
@@ -422,7 +423,7 @@ router.post("/buynow/id=:id1/gia=:id2",restrict, async (req, res) => {
         });
     }
 
-    
+
 
 
     const url = req.query.retUrl;
@@ -434,8 +435,8 @@ router.post("/buynow/id=:id1/gia=:id2",restrict, async (req, res) => {
 })
 
 
-router.get("/productAutioning",restrict,async(req,res)=>{
-    if(req.session.isAuthenticated==false){
+router.get("/productAutioning", restrict, async (req, res) => {
+    if (req.session.isAuthenticated == false) {
         return res.redirect('/account/login?retUrl=/account/productAutioning');
     }
 
@@ -521,9 +522,9 @@ router.get("/productAuctioned", restrict, async (req, res) => {
         })
     }
 
-    res.render("vwAccount/autioned",{
+    res.render("vwAccount/autioned", {
         isAuctioned: true,
-        products:rows,
+        products: rows,
         num_of_page: nPages,
         isPage: +page,
         empty: rows.length === 0,
@@ -536,10 +537,10 @@ router.get("/productAuctioned", restrict, async (req, res) => {
 
 
 
-router.post('/voteLike/bidder=:id1/product=:id2', async(req, res) =>{
-    const idBidder=req.params.id1;
-    const idProduct=req.params.id2;
-    
+router.post('/voteLike/bidder=:id1/product=:id2', async (req, res) => {
+    const idBidder = req.params.id1;
+    const idProduct = req.params.id2;
+
     console.log(idBidder, idProduct);
     let rows1 = await userModel.single(idBidder);
     let rows2 = await productModel.single(idProduct);
@@ -548,7 +549,7 @@ router.post('/voteLike/bidder=:id1/product=:id2', async(req, res) =>{
     const result1 = await userModel.patch(rows1[0]);
     const result2 = await productModel.patch(rows2[0]);
     let check = await transporter.sendMail({
-        from:"webapponlineauction@gmail.com",
+        from: "webapponlineauction@gmail.com",
         to: rows1[0].Email,
         subject: "Thông báo Đánh giá✔", // Subject line
         text: "Like", // plain text body
@@ -556,9 +557,9 @@ router.post('/voteLike/bidder=:id1/product=:id2', async(req, res) =>{
     });
     res.redirect('/account/productAuctioned');
 })
-router.post('/voteDislike/bidder=:id1/product=:id2', async(req, res) =>{
-    const idBidder=req.params.id1;
-    const idProduct=req.params.id2;
+router.post('/voteDislike/bidder=:id1/product=:id2', async (req, res) => {
+    const idBidder = req.params.id1;
+    const idProduct = req.params.id2;
     let rows1 = await userModel.single(idBidder);
     let rows2 = await productModel.single(idProduct);
     rows1[0].DiemTru = rows1[0].DiemTru + 1;
@@ -567,7 +568,7 @@ router.post('/voteDislike/bidder=:id1/product=:id2', async(req, res) =>{
     const result2 = await productModel.patch(rows2[0]);
 
     let check = await transporter.sendMail({
-        from:"webapponlineauction@gmail.com",
+        from: "webapponlineauction@gmail.com",
         to: rows1[0].Email,
         subject: "Thông báo Đánh giá✔", // Subject line
         text: "Dislike", // plain text body
@@ -599,14 +600,14 @@ router.get("/uptoseller", async (req, res) => {
     });
 })
 
-router.get("/coin",restrict, async (req, res) => {
-    user =await userModel.single(+res.locals.authUser.IdNguoiDung);
-    
-    let percent=Math.floor(user[0].DiemCong*100/(user[0].DiemCong+user[0].DiemTru));
+router.get("/coin", restrict, async (req, res) => {
+    user = await userModel.single(+res.locals.authUser.IdNguoiDung);
 
-    res.render('vwAccount/coin',{
-    User:user[0],
-    percent:percent
+    let percent = Math.floor(user[0].DiemCong * 100 / (user[0].DiemCong + user[0].DiemTru));
+
+    res.render('vwAccount/coin', {
+        User: user[0],
+        percent: percent
     });
 })
 
