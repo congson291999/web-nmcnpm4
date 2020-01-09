@@ -9,8 +9,8 @@
                                 <tr>
                                     <th class="cart-product-id">ProducId</th>
                                     <th class="cart-product-name">ProductName</th>
-                                    <th> ngayhethan</th>
-                                    <th> gia hien tai</th>
+                                   
+                                    <th> Giá sản phẩm</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -20,7 +20,7 @@
                                     <input id="txtId" name="txtId" style="display:none;" value={{IdSanPham}}></input>
                                     <td>{{IdSanPham}}</td>
                                     <td><a href="/products/{{IdSanPham}}">{{TenSanPham}}</a></td>
-                                    <td>{{NgayHetHan}}</td>
+                                   
                                     <td>{{format GiaHienTai}}</td>
                                 </tr>
                                 {{/each}}

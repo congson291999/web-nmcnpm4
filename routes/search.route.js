@@ -25,11 +25,6 @@ router.get('/',  async(req, res) => {
         rowsSearch = await productModel.allInIdArray(listResult,offset);         
     }
     //res.render('vwSearch/search');
-
-    
-
-    
-
     for (let c of rowsSearch) {
         let nguoithang = await userModel.single(c.IdNguoiThang);
         if(nguoithang[0]!=null)
