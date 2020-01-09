@@ -20,7 +20,7 @@ router.get('/:id', async (req, res) => {
     let [rows1, nguoiban, nguoithang] = await Promise.all([
         productModel.allByCat(rows[0].LoaiSanPham),
         userModel.single(rows[0].IdNguoiBan),
-        userModel.single(rows[0].IdNguoiThang)
+        userModel.single(rows[0].IdNguoiThang),
     ]);
     let listImages = [];
     for (let i = 0; i< rows[0].SoHinh; i++) listImages[i] = i+1; 
@@ -41,10 +41,10 @@ router.get('/:id', async (req, res) => {
     if(nguoithang[0]!=null)
     nguoithang[0].HoVaTen=mask(nguoithang[0].HoVaTen,0,nguoithang[0].HoVaTen.length-5,'*');
     nguoiban[0].HoVaTen=mask(nguoiban[0].HoVaTen,0,nguoiban[0].HoVaTen.length-5,'*');
-    for(let c of bidders){
-        c.NgayDauGia=moment(c.NgayDauGia, "YYYY-MM-DD hh:mm:ss").format("DD/MM/YYYY hh:mm");
-        c.TenNguoiMua=mask(c.TenNguoiMua,0,c.TenNguoiMua.length-4,'*');
-    }
+    // for(let c of bidders){
+    //     c.NgayDauGia=moment(c.NgayDauGia, "YYYY-MM-DD hh:mm:ss").format("DD/MM/YYYY hh:mm");
+    //     c.TenNguoiMua=mask(c.TenNguoiMua,0,c.TenNguoiMua.length-4,'*');
+    // }
 
 
     rows[0].NgayDang = moment(rows[0].NgayDang, "YYYY-MM-DD hh:mm:ss").format("DD/MM/YYYY");
@@ -54,8 +54,18 @@ router.get('/:id', async (req, res) => {
     {
         muangay=true;
     }
+    
+    if(req.session.isAuthenticated === true ){
+        total = await productModel.proByWishlist(req.params.id, req.session.authUser.IdNguoiDung);
+    }
+    else{
+        total=1;
+    }
+
+    
 
     res.render('vwProducts/singleProduct', {
+        total,
         SanPhamLienQuan: rows1,
         product: rows[0],
         NguoiBan: nguoiban[0],

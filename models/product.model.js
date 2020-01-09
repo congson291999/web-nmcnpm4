@@ -68,4 +68,9 @@ module.exports = {
   commentbyPro: (id) => db.load(`select * from binhluan b, nguoidung n where b.sanpham_id = ${id} and n.IDNguoiDung = b.nguoidung_id`),
   //them binh luan
   addComment: (entity) => db.add('binhluan',entity),
+  delWishlist: (proId, userId) => db.load(`delete from  wishlist where IdSanPham = ${proId} and IdNguoiDung = ${userId}`),
+  proByWishlist: async (proId, userId) =>{
+    result=await db.load(`select count(*) as total from wishlist where IdSanPham = ${proId} and IdNguoiDung = ${userId}`);
+    return result[0].total;
+  } 
 };

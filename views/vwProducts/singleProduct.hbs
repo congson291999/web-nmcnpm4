@@ -106,9 +106,9 @@
                                 <div class="quantity">
                                     
                                     {{#if (eq NguoiBan.IdNguoiDung authUser.IdNguoiDung)}}
-                                    {{else}}
+                                    {{else}}                                    
                                 <button class="add-to-cart"
-                                    formaction="/account/login?retUrl=/products/{{product.IdSanPham}}">Mua sản phẩm</button>
+                                    {{#if isAuthenticated}}formaction="/account/deal?id={{product.IdSanPham}}"{{else}}formaction="/account/login?retUrl=/products/{{product.IdSanPham}}"{{/if}}>Mua sản phẩm</button>
                                     {{/if}}
                             </form>
                         </div>
@@ -120,9 +120,11 @@
                                     value={{product.IdSanPham}}></input>
                                      {{#if (eq NguoiBan.IdNguoiDung authUser.IdNguoiDung)}}
                                     {{else}}
+                                    {{#if total}}{{else}}
                                 <button class="add-to-cart" style="border:none; background:0"
                                     formaction="/account/cart?retUrl=/products/{{product.IdSanPham}}" type="submit"> <a
                                         href=""><i class="fa fa-heart-o"> Thêm vào wishlist </a></i></button>
+                                    {{/if}}
                                     {{/if}}
 
                             </form>

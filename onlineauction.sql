@@ -85,9 +85,9 @@ CREATE TABLE `daugia` (
   `Id` int(11) NOT NULL,
   `IdSanPham` int(11) NOT NULL,
   `IdNguoiDung` int(11) NOT NULL,
-  `TenNguoiMua` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Gia` int(11) NOT NULL,
-  `NgayDauGia` datetime NOT NULL
+  `TenNguoiMua` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `Gia` int(11) DEFAULT NULL,
+  `NgayDauGia` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -179,6 +179,7 @@ CREATE TABLE `nguoidung` (
   `MatKhau` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `HoVaTen` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `Email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `SDT` int(11),
   `NgaySinh` date NOT NULL,
   `LoaiNguoiDung` int(11) NOT NULL,
   `DiemCong` int(11) NOT NULL,
