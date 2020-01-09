@@ -82,7 +82,7 @@
                         <div class="rating-box pt-20">
                             <ul class="rating rating-with-review-item">
                                 <h5 class="manufacturer">
-                                    <span>Seller: </span>
+                                    <span>Người bán: </span>
                                     <a href="">{{NguoiBan.HoVaTen}}</a>
                                 </h5>
                                 <li><i class="fa fa-thumbs-up"></i> {{NguoiBan.DiemCong}}</li>
@@ -95,7 +95,7 @@
                         <br>
                         <div class="price-box">
                          
-                            <span class="new-price new-price-21">{{format product.GiaHienTai}} VND</span>
+                            <span class="new-price new-price-21">Giá bán: {{format product.GiaHienTai}} VND</span>
 
                         </div>
 
@@ -106,7 +106,7 @@
                                 <div class="quantity">
                                     
                                     {{#if (eq NguoiBan.IdNguoiDung authUser.IdNguoiDung) }}
-                                    {{else}}  {{#if bought}}<h3>{{NguoiBan.SDT}}</h3> {{else}}                                
+                                    {{else}}  {{#if bought}}<h4>Số điện thoại: 0{{NguoiBan.SDT}}</h4> {{else}}                                
                                 <button class="add-to-cart"
                                     {{#if isAuthenticated}}formaction="/account/deal?id={{product.IdSanPham}}"{{else}}formaction="/account/login?retUrl=/products/{{product.IdSanPham}}"{{/if}}>Mua sản phẩm</button>
                                     {{/if}}
