@@ -664,4 +664,25 @@ router.get('/product/delete/:id', async (req, res) => {
         layout: 'admin_layout.hbs'
     });
 })
+
+router.get('/dashboard', async (req, res) =>{
+    if(req.session.isAuthenticated==false){
+        return res.redirect('/account/login?retUrl=/admin/user/add');
+    }
+    
+    if (req.session.authUser.LoaiNguoiDung!=0)
+        return res.render('vwError/permission');
+
+    let countProduct = await productModel.countProduct();
+    let countProduct2 = await productModel.countProduct2();
+    let countDeal = await aution.countDeal();
+    let countRegister = await userModel.countRegister();
+    console.log(countProduct);
+    res.render('vwAdmin/dashboard',  {
+        layout: 'admin_layout.hbs', 
+        countProduct: countProduct,
+        countProduct2: countProduct2,
+        countDeal: countDeal,
+        countRegister: countRegister});
+})
 module.exports = router;
