@@ -7,10 +7,17 @@
                         <table class="table">
                             <thead>
                                 <tr>
+<<<<<<< HEAD
+                                    <th class="cart-product-id">ProducId</th>
+                                    <th class="cart-product-name">ProductName</th>
+                                   
+                                    <th> Giá sản phẩm</th>
+=======
                                     <th class="cart-product-id">Mã sản phẩm</th>
                                     <th class="cart-product-name">Tên sản phẩm</th>
                                     <th> Hình ảnh</th>
                                     <th> Xóa </th>
+>>>>>>> 6be8b5c72e0a43d4ebb80532ff24dfcf2dfcdb87
                                 </tr>
                             </thead>
                             <tbody>
@@ -18,9 +25,14 @@
                                 <tr>
                                     <td>{{IdSanPham}}</td>
                                     <td><a href="/products/{{IdSanPham}}">{{TenSanPham}}</a></td>
+<<<<<<< HEAD
+                                   
+                                    <td>{{format GiaHienTai}}</td>
+=======
                                     <td><img src="/images/product/{{IdSanPham}}/1.jpg" style="width: 150px; height: 150px;" alt=""></td>
                                     <td><a href="delete/wishlist?id={{IdSanPham}}"><i class="fa fa-times" aria-hidden="true"></i></a></td>
 
+>>>>>>> 6be8b5c72e0a43d4ebb80532ff24dfcf2dfcdb87
                                 </tr>
                                 {{/each}}
                             </tbody>
