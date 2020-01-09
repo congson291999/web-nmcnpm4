@@ -28,12 +28,12 @@
 
 <body class="login">
     <div class="container">
-        <div class="d-flex justify-content-center h-100">
-            <div class="card_registration">
+        <div class="d-flex justify-content-center h-100" >
+            <div class="card_registration  fade show" style="border-style: solid; height:800px;">
                 <div class="card-header">
                     <h3>Sign Up</h3>
                 </div>
-                <div class="card-body">
+                <div class="card-body show" >
                     {{#if err_message}}
                     <div class="alert alert-warning alert-dismissible fade show" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -109,7 +109,7 @@
                             data-sitekey="6LdH78cUAAAAAFHVSYEtOp-9_19JGC5mjQi2jxd2"></div>
                         <div id="pleaseCheck"></div>
                         <div class="form-group">
-                            <button id="submitButton" name="submitButton" class="btn float-right login_btn"
+                            <button id="submitButton" name="submitButton" style="width: 150px; margin-top:30px; " class="btn float-right login_btn"
                                 type="submit">SIGN UP</button>
                         </div>
                     </form>
