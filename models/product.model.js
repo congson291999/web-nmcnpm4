@@ -2,41 +2,41 @@ const db = require('../utils/db');
 const config = require('../config/default.json');
 
 module.exports = {
-  all: () => db.load('select * from sanpham where NgayHetHan > SYSDATE() and TinhTrang=0'),
-  allInIdArray: (array, offset) => db.load(`select * from sanpham where IdSanPham in (${array.join(',')}) AND NgayHetHan > SYSDATE() and TinhTrang=0 limit ${config.paginate.limit} OFFSET ${offset}`),
-  allByCat: catId => db.load(`  SELECT * FROM sanpham WHERE LoaiSanPham = ${catId} AND NgayHetHan > SYSDATE()
+  all: () => db.load('select * from sanpham where TinhTrang=0'),
+  allInIdArray: (array, offset) => db.load(`select * from sanpham where IdSanPham in (${array.join(',')})  and TinhTrang=0 limit ${config.paginate.limit} OFFSET ${offset}`),
+  allByCat: catId => db.load(`  SELECT * FROM sanpham WHERE LoaiSanPham = ${catId}
   UNION
-  SELECT * FROM sanpham WHERE LoaiSanPham in (SELECT IdDanhMuc FROM danhmuc WHERE ThuocDanhMuc = ${catId}) AND NgayHetHan > SYSDATE() and TinhTrang=0`),
+  SELECT * FROM sanpham WHERE LoaiSanPham in (SELECT IdDanhMuc FROM danhmuc WHERE ThuocDanhMuc = ${catId})  and TinhTrang=0`),
   countByCat: async catId => {
-    const rows = await db.load(`SELECT count(*) as total FROM (SELECT * FROM sanpham WHERE LoaiSanPham = ${catId} AND NgayHetHan > SYSDATE() and TinhTrang=0
+    const rows = await db.load(`SELECT count(*) as total FROM (SELECT * FROM sanpham WHERE LoaiSanPham = ${catId}   and TinhTrang=0
                                 UNION
-                                SELECT * FROM sanpham WHERE LoaiSanPham in (SELECT IdDanhMuc FROM danhmuc WHERE ThuocDanhMuc = ${catId}) AND NgayHetHan > SYSDATE() and TinhTrang=0) c`)
+                                SELECT * FROM sanpham WHERE LoaiSanPham in (SELECT IdDanhMuc FROM danhmuc WHERE ThuocDanhMuc = ${catId}) and TinhTrang=0) c`)
     return rows[0].total;
   },
-  allAvailableBySeller: sellerId => db.load(`  SELECT * FROM sanpham WHERE IdNguoiBan = ${sellerId} AND NgayHetHan > SYSDATE() and TinhTrang=0`),
+  allAvailableBySeller: sellerId => db.load(`  SELECT * FROM sanpham WHERE IdNguoiBan = ${sellerId} and TinhTrang=0`),
   countAvailableBySeller: async sellerId => {
-    const rows = await db.load(`SELECT count(*) as total FROM ( SELECT * FROM sanpham WHERE IdNguoiBan = ${sellerId} AND NgayHetHan > SYSDATE() and TinhTrang=0) c`)
+    const rows = await db.load(`SELECT count(*) as total FROM ( SELECT * FROM sanpham WHERE IdNguoiBan = ${sellerId} and TinhTrang=0) c`)
     return rows[0].total;
   },
-  pageAvailableBySeller: (sellerId, offset) => db.load(`SELECT * FROM (SELECT * FROM sanpham WHERE IdNguoiBan = ${sellerId} AND NgayHetHan > SYSDATE() and TinhTrang=0
+  pageAvailableBySeller: (sellerId, offset) => db.load(`SELECT * FROM (SELECT * FROM sanpham WHERE IdNguoiBan = ${sellerId} and TinhTrang=0
     ) c limit ${config.paginate.limit} OFFSET ${offset}`),
 
-  allAuctionedBySeller: sellerId => db.load(`  SELECT * FROM sanpham WHERE IdNguoiBan = ${sellerId} AND (NgayHetHan < SYSDATE() or  TinhTrang=1)`),
+  allAuctionedBySeller: sellerId => db.load(` SELECT distinct * FROM sanpham s, daugia d WHERE s.IdNguoiBan = ${sellerId} AND d.IdSanPham = s.IdSanPham`),
   countAuctionedBySeller: async sellerId => {
-    const rows = await db.load(`SELECT count(*) as total FROM ( SELECT * FROM sanpham WHERE IdNguoiBan = ${sellerId} AND (NgayHetHan < SYSDATE() or  TinhTrang=1) ) c`)
+    const rows = await db.load(`SELECT count(*) as total FROM ( SELECT distinct * FROM sanpham s, daugia d WHERE s.IdNguoiBan = ${sellerId} AND d.IdSanPham = s.IdSanPham ) c`)
     return rows[0].total;
   },
-  pageAuctionedByBidder: (bidderId, offset) => db.load(`SELECT * FROM (SELECT * FROM sanpham WHERE IdNguoiThang = ${bidderId} AND (NgayHetHan < SYSDATE() or TinhTrang=1)
+  pageAuctionedByBidder: (bidderId, offset) => db.load(`SELECT * FROM (SELECT * FROM sanpham WHERE IdNguoiThang = ${bidderId} AND (NgayHetHan < SYSDATE() or TinhTrang=1))
       ) c limit ${config.paginate.limit} OFFSET ${offset}`),
   countAuctionedByBidder: async bidderId => {
         const rows = await db.load(`SELECT count(*) as total FROM ( SELECT * FROM sanpham WHERE IdNguoiThang = ${bidderId} AND (NgayHetHan < SYSDATE() or TinhTrang=1)) c`)
         return rows[0].total;
       },
-  pageAuctionedBySeller: (sellerId, offset) => db.load(`SELECT * FROM (SELECT * FROM sanpham WHERE IdNguoiBan = ${sellerId} AND (NgayHetHan < SYSDATE() or  TinhTrang=1)
+  pageAuctionedBySeller: (sellerId, offset) => db.load(`SELECT * FROM ( SELECT distinct * FROM sanpham s, daugia d WHERE s.IdNguoiBan = ${sellerId} AND d.IdSanPham = s.IdSanPham)
           ) c limit ${config.paginate.limit} OFFSET ${offset}`),
-  pageByCat: (catId, offset) => db.load(`SELECT * FROM (SELECT * FROM sanpham WHERE LoaiSanPham = ${catId} AND NgayHetHan > SYSDATE() and TinhTrang=0
+  pageByCat: (catId, offset) => db.load(`SELECT * FROM (SELECT * FROM sanpham WHERE LoaiSanPham = ${catId} and TinhTrang=0
                                         UNION
-                                        SELECT * FROM sanpham WHERE LoaiSanPham in (SELECT IdDanhMuc FROM danhmuc WHERE ThuocDanhMuc = ${catId}) AND NgayHetHan > SYSDATE() and TinhTrang=0
+                                        SELECT * FROM sanpham WHERE LoaiSanPham in (SELECT IdDanhMuc FROM danhmuc WHERE ThuocDanhMuc = ${catId}) and TinhTrang=0
                                         ) c limit ${config.paginate.limit} OFFSET ${offset}`),
 
   single: id => db.load(`select * from sanpham where IdSanPham = ${id} `),
