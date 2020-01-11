@@ -78,7 +78,7 @@ router.get('/:id', async (req, res) => {
     });
 })
 
-router.post('/comment', async (req,res) => {
+router.post('/comment', restrict, async (req,res) => {
     const results = await productModel.addComment({
         nguoidung_id: req.session.authUser.IdNguoiDung,
         sanpham_id: req.body.sanpham_id,

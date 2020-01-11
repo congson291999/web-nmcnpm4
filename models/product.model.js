@@ -21,18 +21,18 @@ module.exports = {
   pageAvailableBySeller: (sellerId, offset) => db.load(`SELECT * FROM (SELECT * FROM sanpham WHERE IdNguoiBan = ${sellerId} and TinhTrang=0
     ) c limit ${config.paginate.limit} OFFSET ${offset}`),
 
-  allAuctionedBySeller: sellerId => db.load(` SELECT distinct * FROM sanpham s, daugia d WHERE s.IdNguoiBan = ${sellerId} AND d.IdSanPham = s.IdSanPham`),
+  allAuctionedBySeller: sellerId => db.load(`  SELECT * FROM sanpham WHERE IdNguoiBan = ${sellerId} AND (NgayHetHan < SYSDATE() or  TinhTrang=1)`),
   countAuctionedBySeller: async sellerId => {
-    const rows = await db.load(`SELECT count(*) as total FROM ( SELECT distinct * FROM sanpham s, daugia d WHERE s.IdNguoiBan = ${sellerId} AND d.IdSanPham = s.IdSanPham ) c`)
+    const rows = await db.load(`SELECT count(*) as total FROM ( SELECT * FROM sanpham WHERE IdNguoiBan = ${sellerId} AND (NgayHetHan < SYSDATE() or  TinhTrang=1) ) c`)
     return rows[0].total;
   },
-  pageAuctionedByBidder: (bidderId, offset) => db.load(`SELECT * FROM (SELECT * FROM sanpham WHERE IdNguoiThang = ${bidderId} AND (NgayHetHan < SYSDATE() or TinhTrang=1))
+  pageAuctionedByBidder: (bidderId, offset) => db.load(`SELECT * FROM (SELECT * FROM sanpham WHERE IdNguoiThang = ${bidderId} AND (NgayHetHan < SYSDATE() or TinhTrang=1)
       ) c limit ${config.paginate.limit} OFFSET ${offset}`),
   countAuctionedByBidder: async bidderId => {
         const rows = await db.load(`SELECT count(*) as total FROM ( SELECT * FROM sanpham WHERE IdNguoiThang = ${bidderId} AND (NgayHetHan < SYSDATE() or TinhTrang=1)) c`)
         return rows[0].total;
       },
-  pageAuctionedBySeller: (sellerId, offset) => db.load(`SELECT * FROM ( SELECT distinct * FROM sanpham s, daugia d WHERE s.IdNguoiBan = ${sellerId} AND d.IdSanPham = s.IdSanPham)
+  pageAuctionedBySeller: (sellerId, offset) => db.load(`SELECT * FROM (SELECT * FROM sanpham WHERE IdNguoiBan = ${sellerId} AND (NgayHetHan < SYSDATE() or  TinhTrang=1)
           ) c limit ${config.paginate.limit} OFFSET ${offset}`),
   pageByCat: (catId, offset) => db.load(`SELECT * FROM (SELECT * FROM sanpham WHERE LoaiSanPham = ${catId} and TinhTrang=0
                                         UNION
